@@ -20,9 +20,9 @@
 // prerelease versions, akin to alphas or betas in programs that have actual
 // development teams and production quality.
 # define VERSION_MAJOR 0
-# define VERSION_MINOR 0
+# define VERSION_MINOR 1
 # define VERSION_PATCH 0
-# define VERSION_BUILD 0
+# define VERSION_BUILD 1
 
 
 // Enable this flag to build a debug version of the program.  Debug versions

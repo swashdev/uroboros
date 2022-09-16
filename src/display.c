@@ -84,8 +84,13 @@ void draw_dead_snake( struct snake snek )
 // Prints the version number.
 void print_version_number( int y, int x )
 {
-    mvprintw( y, x, "Uroboros v%d.%d.%d-prerelease",
+    mvprintw( y, x, "Uroboros v%d.%d.%d",
             VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
+
+#if VERSION_BUILD > 0
+    // Dev builds are indicated by a prerelease tag.
+    printw( "-dev.%d", VERSION_BUILD );
+#endif
 
 #ifdef DEBUG
     // Debug builds are indicated by a build metadata tag.
