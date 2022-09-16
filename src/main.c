@@ -69,6 +69,10 @@ int main()
     mvprintw( 0, 0, "Got screen size %03d, %03d", max_x, max_y );
 
 
+    // Print the version number.
+    print_version_number( max_y - 1, 0 );
+
+
     // Assign coordinates for the apple.
     int apple_x, apple_y;
     do

@@ -9,6 +9,7 @@
 
 #include "curses.h"
 
+#include "globals.h"
 #include "segment.h"
 #include "snake.h"
 #include "display.h"
@@ -77,4 +78,12 @@ void draw_dead_snake( struct snake snek )
 
         node = node->next;
     }
+}
+
+
+// Prints the version number.
+void print_version_number( int y, int x )
+{
+    mvprintw( y, x, "Uroboros v%d.%d.%d-prerelease",
+            VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
 }

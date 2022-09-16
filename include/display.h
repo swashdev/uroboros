@@ -52,4 +52,8 @@ void draw_apple( int y, int x );
 void draw_golden_apple( int y, int x );
 
 
+// Prints the version number.
+void print_version_number( int y, int x );
+
+
 #endif
