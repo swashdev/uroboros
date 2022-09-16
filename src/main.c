@@ -166,7 +166,13 @@ int main()
         switch( input )
         {
 
+            case 'v':
+                print_version_number( max_y - 1, 0 );
+                break;
+
             case 'c':
+                print_version_number( max_y - 1, 0 );
+                move( apple_y, apple_x );
                 display_license_agreement();
                 // Redraw the screen.
                 clear();
