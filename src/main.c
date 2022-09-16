@@ -91,7 +91,7 @@ int main()
 
 
     signed char direction = INVALID;
-    char input = 0;
+    int input = 0;
     char dead = 0;
 
 
@@ -198,18 +198,26 @@ int main()
                 break;
 
             case 'h':
+            case 'a':
+            case KEY_LEFT:
                 if( direction != RIGHT ) direction = LEFT;
                 break;
 
             case 'j':
+            case 's':
+            case KEY_DOWN:
                 if( direction != UP )    direction = DOWN;
                 break;
 
             case 'k':
+            case 'w':
+            case KEY_UP:
                 if( direction != DOWN )  direction = UP;
                 break;
 
             case 'l':
+            case 'd':
+            case KEY_RIGHT:
                 if( direction != LEFT )  direction = RIGHT;
                 break;
 
