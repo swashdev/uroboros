@@ -81,6 +81,9 @@ int main()
         // Move the player.
         if( direction != INVALID )
         {
+            // Erase the player's tail before moving them.
+            mvaddch( player.tail->y, player.tail->x, ' ' );
+
             move_snake( &player, direction );
         }
 
