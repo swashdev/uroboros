@@ -35,6 +35,8 @@ int main()
     initscr();
     raw();
     noecho();
+    cbreak();
+    nodelay( stdscr, TRUE );
 
     keypad( stdscr, 1 );
 
@@ -156,6 +158,12 @@ int main()
                 break;
 
         } // switch( input )
+
+
+        // Delay for a given amount of time before continuing.
+        clock_t start_time = clock();
+
+        while( clock() < start_time + 100000 );
 
     } while( !dead && input != 'q' );
 
