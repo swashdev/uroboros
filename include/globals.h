@@ -25,6 +25,11 @@
 # define VERSION_BUILD 0
 
 
+// Enable this flag to build a debug version of the program.  Debug versions
+// will give you debug output.
+//# define DEBUG
+
+
 // Constants used to represent directions.
 # define INVALID  0
 # define UP      -1

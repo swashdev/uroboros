@@ -21,16 +21,6 @@
 
 int main()
 {
-    printf( "Uroboros, version %d.%d.%d-prerelease\n",
-            VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
-
-    time_t t;
-
-    unsigned int seed = (unsigned int) time( &t );
-
-    printf( "Your lucky number is %u.\n", seed );
-
-    srand( seed );
 
     initscr();
     raw();
@@ -52,6 +42,18 @@ int main()
     init_pair( 3, COLOR_YELLOW, COLOR_YELLOW );
 
 
+    // Initialize RNG.
+    time_t t;
+
+    unsigned int seed = (unsigned int) time( &t );
+
+#ifdef DEBUG
+    mvprintw( 2, 0, "Your lucky number is %u", seed );
+#endif
+
+    srand( seed );
+
+
     // Initialize the snake.
     snake player;
 
@@ -66,7 +68,9 @@ int main()
 
     // Get the outer boundaries of the terminal.
     getmaxyx( stdscr, max_y, max_x );
+#ifdef DEBUG
     mvprintw( 0, 0, "Got screen size %03d, %03d", max_x, max_y );
+#endif
 
 
     // Print the version number.
@@ -81,7 +85,9 @@ int main()
         apple_y = rand() % max_y;
     } while( apple_x == 0 && apple_y == 0 );
 
+#ifdef DEBUG
     mvprintw( 1, 0, "Apple spawned at coords %03d, %03d", apple_x, apple_y );
+#endif
 
 
     signed char direction = INVALID;
@@ -103,7 +109,9 @@ int main()
         {
             // Add a segment to the snake.
             grow_snake( &player );
+#ifdef DEBUG
             mvprintw( 0, 0, "Length: %u", player.length );
+#endif
 
             // Move the apple.
             do
@@ -111,8 +119,10 @@ int main()
                 apple_x = rand() % max_x;
                 apple_y = rand() % max_y;
 
+#ifdef DEBUG
                 mvprintw( 1, 0, "Apple spawned at coords %03d, %03d",
                         apple_x, apple_y );
+#endif
             } while( apple_x == player.head->x && apple_y == player.head->y );
         }
         // If the player did NOT eat an apple, erase the spot where the new
