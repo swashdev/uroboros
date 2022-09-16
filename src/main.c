@@ -62,9 +62,17 @@ int main()
     player.length = 1;
 
 
+    // Assign coordinates for the apple.
+    int apple_x, apple_y;
+    do
+    {
+        apple_x = rand() % 80;
+        apple_y = rand() % 24;
+    } while( apple_x == 0 && apple_y == 0 );
+
+
     draw_snake( player );
-    draw_apple( 10, 10 );
-    draw_golden_apple( 10, 15 );
+    draw_apple( apple_y, apple_x );
 
     getch();
 
