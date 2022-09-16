@@ -71,10 +71,69 @@ int main()
     } while( apple_x == 0 && apple_y == 0 );
 
 
-    draw_snake( player );
-    draw_apple( apple_y, apple_x );
+    signed char direction = INVALID;
+    char input = 0;
 
-    getch();
+
+    do
+    {
+
+        // Move the player.
+        if( direction != INVALID )
+        {
+            move_snake( &player, direction );
+        }
+
+        // Check if the player ate an apple.
+        if( player.head->x == apple_x && player.head->y == apple_y )
+        {
+            // Add a segment to the snake.
+            grow_snake( &player );
+            mvprintw( 0, 0, "Length: %u", player.length );
+
+            // Move the apple.
+            do
+            {
+                apple_x = rand() % 80;
+                apple_y = rand() % 24;
+            } while( apple_x == player.head->x && apple_y == player.head->y );
+        }
+
+        // Draw the apple & the snake.
+        draw_apple( apple_y, apple_x );
+        draw_snake( player );
+
+        // Get input.
+        input = getch();
+
+        switch( input )
+        {
+
+            case 'p':
+                mvprintw( 0, 0, "Press any key to unpause." );
+                getch();
+                break;
+
+            case 'h':
+                if( direction != RIGHT ) direction = LEFT;
+                break;
+
+            case 'j':
+                if( direction != UP )    direction = DOWN;
+                break;
+
+            case 'k':
+                if( direction != DOWN )  direction = UP;
+                break;
+
+            case 'l':
+                if( direction != LEFT )  direction = RIGHT;
+                break;
+
+        } // switch( input )
+
+    } while( input != 'q' );
+
 
     endwin();
 
