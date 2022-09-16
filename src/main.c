@@ -66,7 +66,7 @@ int main()
 
     // Get the outer boundaries of the terminal.
     getmaxyx( stdscr, max_y, max_x );
-    mvprintw( 0, 0, "Got screen size %d, %d", max_x, max_y );
+    mvprintw( 0, 0, "Got screen size %03d, %03d", max_x, max_y );
 
 
     // Assign coordinates for the apple.
@@ -77,7 +77,7 @@ int main()
         apple_y = rand() % max_y;
     } while( apple_x == 0 && apple_y == 0 );
 
-    mvprintw( 1, 0, "Apple spawned at coords %d, %d", apple_x, apple_y );
+    mvprintw( 1, 0, "Apple spawned at coords %03d, %03d", apple_x, apple_y );
 
 
     signed char direction = INVALID;
@@ -107,7 +107,7 @@ int main()
                 apple_x = rand() % max_x;
                 apple_y = rand() % max_y;
 
-                mvprintw( 0, 0, "Apple spawned at coords %d, %d",
+                mvprintw( 1, 0, "Apple spawned at coords %03d, %03d",
                         apple_x, apple_y );
             } while( apple_x == player.head->x && apple_y == player.head->y );
         }
