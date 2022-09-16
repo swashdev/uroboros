@@ -33,4 +33,9 @@
 # define RIGHT    2
 
 
+// The outer boundaries of the terminal.
+int max_x;
+int max_y;
+
+
 #endif
