@@ -88,6 +88,12 @@ void move_snake( snake *snek, signed char direction )
     x += snek->head->x;
     y += snek->head->y;
 
+    // Wrap around if the snake goes beyond the boundaries of the screen.
+    if( x >= max_x )  x -= max_x;
+    else if( x < 0 )  x = max_x - 1;
+    if( y >= max_y )  y -= max_y;
+    else if( y < 0 )  y = max_y - 1;
+
     // Allocate a new segment.
     segment *new_head = (segment*) malloc( sizeof( segment ) );
     new_head->previous = NULL;
