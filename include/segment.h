@@ -20,7 +20,7 @@ struct segment
 {
     int x, y;
 
-    segment *next;
+    segment *next, *previous;
 };
 
 

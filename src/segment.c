@@ -54,6 +54,8 @@ void add_segment( segment *current, int x, int y )
         current->next = (segment*) malloc( sizeof( segment ) );
     }
 
+    current->next->previous = current;
+
     current = current->next;
 
     current->x = x;
