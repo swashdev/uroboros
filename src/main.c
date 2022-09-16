@@ -175,7 +175,7 @@ int main()
 
             case 'p':
                 mvprintw( 0, 0, "Press any key to unpause." );
-                getch();
+                while( getch() == ERR );
                 break;
 
             case 'h':
