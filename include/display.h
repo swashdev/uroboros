@@ -56,4 +56,8 @@ void draw_golden_apple( int y, int x );
 void print_version_number( int y, int x );
 
 
+// Prints the license agreement in a separate window.
+void display_license_agreement();
+
+
 #endif

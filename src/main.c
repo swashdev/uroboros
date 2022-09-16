@@ -173,6 +173,14 @@ int main()
         switch( input )
         {
 
+            case 'c':
+                display_license_agreement();
+                // Redraw the screen.
+                clear();
+                draw_snake( player );
+                draw_apple( apple_y, apple_x );
+                // Fall through to next case.
+
             case 'p':
                 mvprintw( 0, 0, "Press any key to unpause." );
 #ifdef HILITE_APPLE
