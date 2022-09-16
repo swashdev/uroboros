@@ -7,6 +7,8 @@
 // This software is already free; now free yourself.
 
 
+#include <stdlib.h>
+
 #include "globals.h"
 #include "segment.h"
 #include "snake.h"
@@ -75,15 +77,33 @@ void move_snake( snake *snek, signed char direction )
 
     } // switch( direction )
 
+    // Store the tail's old position as a ghost.
+    if( x != 0 || y != 0 )
+    {
+        snek->ghost_x = snek->tail->x;
+        snek->ghost_y = snek->tail->y;
+    }
+
     // Add the current coordinates to the modifiers.
     x += snek->head->x;
     y += snek->head->y;
 
-    // Record the current tail position as a ghost.
-    snek->ghost_x = snek->tail->x;
-    snek->ghost_y = snek->tail->y;
+    // Allocate a new segment.
+    segment *new_head = (segment*) malloc( sizeof( segment ) );
+    new_head->previous = NULL;
+    new_head->x = x;
+    new_head->y = y;
 
-    // Move the snake.
-    move_segment( snek->head, x, y );
+    // Set the head as the "next" segment.
+    new_head->next = snek->head;
+    snek->head->previous = new_head;
+
+    // Set the new segment as the new snake head.
+    snek->head = new_head;
+
+    // Remove the old tail.
+    snek->tail = snek->tail->previous;
+    destroy_segment( snek->tail->next );
+    snek->tail->next = NULL;
 
 } // void move_snake( snake*, signed char )
