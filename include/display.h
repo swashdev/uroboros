@@ -45,11 +45,7 @@ void draw_dead_snake( snake snek );
 
 
 // Draws the apple.
-void draw_apple( int y, int x );
-
-
-// Draws the golden apple.
-void draw_golden_apple( int y, int x );
+void draw_apple( int y, int x, unsigned int count );
 
 
 // Prints the version number.

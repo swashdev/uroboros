@@ -150,14 +150,7 @@ int main()
         if( dead )  break;
 
         // Draw the apple & the snake.
-        if( player.length % 10 == 0)
-        {
-            draw_golden_apple( apple_y, apple_x );
-        }
-        else
-        {
-            draw_apple( apple_y, apple_x );
-        }
+        draw_apple( apple_y, apple_x, player.length );
         
         attron( COLOR_SNAKE );
         mvaddch( player.head->y, player.head->x, ' ' );
@@ -178,7 +171,7 @@ int main()
                 // Redraw the screen.
                 clear();
                 draw_snake( player );
-                draw_apple( apple_y, apple_x );
+                draw_apple( apple_y, apple_x, player.length );
                 // Fall through to next case.
 
             case 'p':

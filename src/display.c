@@ -16,24 +16,16 @@
 
 
 // Draws the apple.
-void draw_apple( int y, int x )
+void draw_apple( int y, int x, unsigned int count )
 {
-    attron( COLOR_APPLE );
+    // Decide whether to draw a regular apple or a golden apple.
+    attr_t color = (count % 10) ? COLOR_APPLE : COLOR_GOLD;
+
+    attron( color );
 
     mvaddch( y, x, '\'' );
 
-    attroff( COLOR_APPLE );
-}
-
-
-// Draws the golden apple.
-void draw_golden_apple( int y, int x )
-{
-    attron( COLOR_GOLD );
-
-    mvaddch( y, x, '\'' );
-
-    attroff( COLOR_GOLD );
+    attroff( color );
 }
 
 
