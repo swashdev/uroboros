@@ -183,6 +183,7 @@ int main()
         do input = getch(); while( input != 'q' );
     }
 
+    destroy_snake( &player );
 
     endwin();
 
