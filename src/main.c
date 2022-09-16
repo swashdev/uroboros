@@ -57,20 +57,21 @@ int main()
     // Initialize the snake.
     snake player;
 
-    player.head = (segment*) malloc( sizeof( segment ) );
-    player.head->x = 0;
-    player.head->y = 0;
-    player.tail = player.head;
-    player.ghost_x = -1;
-    player.ghost_y = -1;
-    player.length = 1;
-
 
     // Get the outer boundaries of the terminal.
     getmaxyx( stdscr, max_y, max_x );
 #ifdef DEBUG
     mvprintw( 0, 0, "Got screen size %03d, %03d", max_x, max_y );
 #endif
+
+
+    player.head = (segment*) malloc( sizeof( segment ) );
+    player.head->x = max_x / 2;
+    player.head->y = max_y / 2;
+    player.tail = player.head;
+    player.ghost_x = -1;
+    player.ghost_y = -1;
+    player.length = 1;
 
 
     // Print the version number.
@@ -83,7 +84,7 @@ int main()
     {
         apple_x = rand() % max_x;
         apple_y = rand() % max_y;
-    } while( apple_x == 0 && apple_y == 0 );
+    } while( apple_x == player.head->x && apple_y == player.head->y );
 
 #ifdef DEBUG
     mvprintw( 1, 0, "Apple spawned at coords %03d, %03d", apple_x, apple_y );
