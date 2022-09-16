@@ -17,10 +17,23 @@
 # include "snake.h"
 
 
+// Enable this to move the terminal cursor over the apple after the screen is
+// drawn.  This can hide the cursor on some terminals and creates less of an
+// eyesore if successful.  It might also reveal the location of the apple even
+// if it's hidden under the snake.
+# define HILITE_APPLE
+
+
 // Color data for the snake & the apple.
 # define COLOR_SNAKE A_BOLD | A_REVERSE | COLOR_PAIR( 1 )
-# define COLOR_APPLE A_BOLD | COLOR_PAIR( 2 )
-# define COLOR_GOLD  A_BOLD | A_REVERSE | COLOR_PAIR( 3 )
+
+# ifdef HILITE_APPLE
+#  define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
+#  define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
+# else
+#  define COLOR_APPLE A_BOLD | COLOR_PAIR( 2 )
+#  define COLOR_GOLD  A_BOLD | A_REVERSE | COLOR_PAIR( 3 )
+# endif
 
 
 // Draws the snake.

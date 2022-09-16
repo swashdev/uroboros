@@ -106,6 +106,10 @@ int main()
         draw_apple( apple_y, apple_x );
         draw_snake( player );
 
+#ifdef HILITE_APPLE
+        move( apple_y, apple_x );
+#endif
+
         // Get input.
         input = getch();
 
