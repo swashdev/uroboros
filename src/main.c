@@ -181,11 +181,20 @@ int main()
                 // Fall through to next case.
 
             case 'p':
-                mvprintw( 0, 0, "Press any key to unpause." );
+                attron( A_REVERSE );
+                mvprintw( max_y / 2, (max_x / 2) - 12,
+                        "Press any key to unpause." );
+                attroff( A_REVERSE );
 #ifdef HILITE_APPLE
                 move( apple_y, apple_x );
 #endif
+
                 while( getch() == ERR );
+
+                mvprintw( max_y / 2, (max_x / 2) - 12,
+                        "                         " );
+                draw_snake( player );
+                draw_apple( apple_y, apple_x, player.length );
                 break;
 
             case 'h':
