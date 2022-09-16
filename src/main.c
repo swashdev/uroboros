@@ -126,7 +126,14 @@ int main()
         if( dead )  break;
 
         // Draw the apple & the snake.
-        draw_apple( apple_y, apple_x );
+        if( player.length % 10 == 0)
+        {
+            draw_golden_apple( apple_y, apple_x );
+        }
+        else
+        {
+            draw_apple( apple_y, apple_x );
+        }
         
         attron( COLOR_SNAKE );
         mvaddch( player.head->y, player.head->x, ' ' );
