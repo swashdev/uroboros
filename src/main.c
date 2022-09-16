@@ -73,6 +73,7 @@ int main()
 
     signed char direction = INVALID;
     char input = 0;
+    char dead = 0;
 
 
     do
@@ -101,6 +102,23 @@ int main()
                 apple_y = rand() % 24;
             } while( apple_x == player.head->x && apple_y == player.head->y );
         }
+
+        // Check if the player bit themself.
+        int head_x = player.head->x, head_y = player.head->y;
+        segment *current = player.head->next;
+        while( current != NULL )
+        {
+            if( head_x == current->x && head_y == current->y )
+            {
+                // Kill the player and terminate the mainloop.
+                dead = true;
+                break;
+            }
+
+            current = current->next;
+        }
+
+        if( dead )  break;
 
         // Draw the apple & the snake.
         draw_apple( apple_y, apple_x );
@@ -139,7 +157,23 @@ int main()
 
         } // switch( input )
 
-    } while( input != 'q' );
+    } while( !dead && input != 'q' );
+
+
+    // If the player has died, draw its corpse and wait for a quit.
+    if( dead )
+    {
+        draw_dead_snake( player );
+
+        mvprintw( 0, 0, "Whoops!  You died with %d points.",
+                player.length - 1 );
+
+        if( player.length <= 4 )  printw( "  Wow, how did you even do that?" );
+
+        printw( "  Press q to quit." );
+
+        do input = getch(); while( input != 'q' );
+    }
 
 
     endwin();
