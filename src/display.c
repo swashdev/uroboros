@@ -86,4 +86,9 @@ void print_version_number( int y, int x )
 {
     mvprintw( y, x, "Uroboros v%d.%d.%d-prerelease",
             VERSION_MAJOR, VERSION_MINOR, VERSION_PATCH );
+
+#ifdef DEBUG
+    // Debug builds are indicated by a build metadata tag.
+    printw( "+debug" );
+#endif
 }
