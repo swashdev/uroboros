@@ -84,9 +84,6 @@ int main()
         // Move the player.
         if( direction != INVALID )
         {
-            // Erase the player's tail before moving them.
-            mvaddch( player.tail->y, player.tail->x, ' ' );
-
             move_snake( &player, direction );
         }
 
@@ -103,6 +100,12 @@ int main()
                 apple_x = rand() % 80;
                 apple_y = rand() % 24;
             } while( apple_x == player.head->x && apple_y == player.head->y );
+        }
+        // If the player did NOT eat an apple, erase the spot where the new
+        // segment would have been.
+        else
+        {
+            mvaddch( player.ghost_y, player.ghost_x, ' ' );
         }
 
         // Check if the player bit themself.
@@ -124,7 +127,10 @@ int main()
 
         // Draw the apple & the snake.
         draw_apple( apple_y, apple_x );
-        draw_snake( player );
+        
+        attron( COLOR_SNAKE );
+        mvaddch( player.head->y, player.head->x, ' ' );
+        attroff( COLOR_SNAKE );
 
 #ifdef HILITE_APPLE
         move( apple_y, apple_x );
