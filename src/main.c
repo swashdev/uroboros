@@ -175,6 +175,9 @@ int main()
 
             case 'p':
                 mvprintw( 0, 0, "Press any key to unpause." );
+#ifdef HILITE_APPLE
+                move( apple_y, apple_x );
+#endif
                 while( getch() == ERR );
                 break;
 
@@ -216,6 +219,10 @@ int main()
         if( player.length <= 4 )  printw( "  Wow, how did you even do that?" );
 
         printw( "  Press q to quit." );
+
+#ifdef HILITE_APPLE
+        move( apple_y, apple_x );
+#endif
 
         do input = getch(); while( input != 'q' );
     }
