@@ -27,7 +27,11 @@
 // Color data for the snake & the apple.
 # define COLOR_SNAKE A_BOLD | A_REVERSE | COLOR_PAIR( 1 )
 
-# ifdef HILITE_APPLE
+
+// If `HILITE_APPLE` is enabled, the color schemes for the apples will be
+// reversed, unless we're compiling for Windows, because the Windows terminal
+// doesn't work that way.
+# if defined( HILITE_APPLE ) && !defined( _WIN32 )
 #  define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
 #  define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
 # else
