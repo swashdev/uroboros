@@ -11,7 +11,7 @@
 #include <time.h>
 #include <stdlib.h>
 
-#include "ncurses.h"
+#include "curses.h"
 
 #include "globals.h"
 #include "segment.h"
