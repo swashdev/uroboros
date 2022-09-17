@@ -79,16 +79,35 @@ int main()
 
 
     // Assign coordinates for the apple.
+    // The apple's initial Y coordinate is fudged to never be on the first
+    // line or on the same line as the player, so that its "Eat these" message
+    // doesn't interfere with the other helpful information.
     int apple_x, apple_y;
     do
     {
         apple_x = rand() % max_x;
-        apple_y = rand() % max_y;
-    } while( apple_x == player.head->x && apple_y == player.head->y );
+        apple_y = 1 + (rand() % (max_y - 1));
+    } while( apple_y == player.head->y );
 
 #ifdef DEBUG
     mvprintw( 1, 0, "Apple spawned at coords %03d, %03d", apple_x, apple_y );
 #endif
+
+
+    // Display helpful information.
+#ifndef DEBUG
+    mvprintw( 0, 0, "Arrow keys, wasd, or hjkl to move.  " );
+    printw( "Press p to pause or q to quit." );
+#endif
+    mvprintw( player.head->y, player.head->x + 2, "<- This is you" );
+    if( apple_x < (max_x - 13) )
+    {
+        mvprintw( apple_y, apple_x + 2, "<- Eat these" );
+    }
+    else
+    {
+        mvprintw( apple_y, apple_x - 13, "Eat these ->" );
+    }
 
 
     signed char direction = INVALID;
