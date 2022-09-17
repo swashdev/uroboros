@@ -88,6 +88,11 @@ void print_version_number( int y, int x )
     // Debug builds are indicated by a build metadata tag.
     printw( "+debug" );
 #endif
+
+#if defined( __APPLE__ ) || defined( __MACH__ )
+    printw( "  (Thanks, Frenchy!)" );
+#endif
+
 }
 
 
