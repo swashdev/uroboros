@@ -247,11 +247,9 @@ int main()
         // Delay for a given amount of time before continuing.
         clock_t start_time = clock();
 
-#if defined( __linux__ ) || defined ( __unix__ )
-        while( clock() < start_time + 100000 );
-#else
-        while( clock() < start_time + 100 );
-#endif
+        // We'll want the program to run at roughly 10FPS.
+        // TODO: Allow a way to adjust this.
+        while( clock() < start_time + (CLOCKS_PER_SEC / 10) );
 
     } while( !dead && input != 'q' );
 
