@@ -160,7 +160,7 @@ int main()
             if( head_x == current->x && head_y == current->y )
             {
                 // Kill the player and terminate the mainloop.
-                dead = true;
+                dead = 1;
                 break;
             }
 
