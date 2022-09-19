@@ -22,6 +22,8 @@
 int main()
 {
 
+    time_t t = time( NULL );
+
     initscr();
     raw();
     noecho();
@@ -33,11 +35,19 @@ int main()
 #ifdef COLOR
     start_color();
 
+    struct tm date = *localtime( &t );
+
     // Initialize the color pair for the snake.
     init_pair( 1, COLOR_GREEN, COLOR_BLACK );
 
-    // Initialize the color pair for the apple.
-    init_pair( 2, COLOR_GREEN, COLOR_RED );
+    if( date.tm_mon == 10 && date.tm_mday == 19 )
+    {
+        init_pair( 2, COLOR_GREEN, COLOR_MAGENTA );
+    }
+    else
+    {
+        init_pair( 2, COLOR_GREEN, COLOR_RED );
+    }
 
     // Initialize the color pair for the golden apple.
     init_pair( 3, COLOR_YELLOW, COLOR_YELLOW );
@@ -45,7 +55,7 @@ int main()
 
 
     // Initialize RNG.
-    unsigned int seed = (unsigned int) time( NULL );
+    unsigned int seed = (unsigned int) t;
 
 #ifdef DEBUG
     mvprintw( 2, 0, "Your lucky number is %u", seed );
