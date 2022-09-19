@@ -23,11 +23,10 @@
 # define COLOR
 
 
-// Enable this to move the terminal cursor over the apple after the screen is
-// drawn.  This can hide the cursor on some terminals and creates less of an
-// eyesore if successful.  It might also reveal the location of the apple even
-// if it's hidden under the snake.
-# define HILITE_APPLE
+// Enable this to reverse the apple's colors.  If your terminal's colors
+// reverse the apple's colors, this will correct that.  Has no effect if
+// `COLOR` is not enabled.
+//# define HILITE_APPLE
 
 
 // Character data for the snake & the apple.
@@ -48,14 +47,13 @@
 # endif
 
 
-// If `HILITE_APPLE` is enabled, the color schemes for the apples will be
-// reversed, unless we're compiling for Windows, because the Windows terminal
-// doesn't work that way.
 # ifndef COLOR
 #  define COLOR_APPLE 0
 #  define COLOR_GOLD  A_BOLD
 # else
-#  if defined( HILITE_APPLE ) && !defined( _WIN32 )
+// If `HILITE_APPLE` is enabled, the color schemes for the apples will be
+// reversed, so that the terminal cursor doesn't screw them up.
+#  ifdef HILITE_APPLE
 #   define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
 #   define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
 #  else

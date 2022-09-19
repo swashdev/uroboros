@@ -180,9 +180,7 @@ int main()
         mvaddch( player.head->y, player.head->x, CHAR_SNAKE );
         attroff( COLOR_SNAKE );
 
-#ifdef HILITE_APPLE
         move( apple_y, apple_x );
-#endif
 
         // Get input.
         input = getch();
@@ -209,9 +207,7 @@ int main()
                 mvprintw( max_y / 2, (max_x / 2) - 12,
                         "Press any key to unpause." );
                 attroff( A_REVERSE );
-#ifdef HILITE_APPLE
                 move( apple_y, apple_x );
-#endif
 
                 while( getch() == ERR );
 
@@ -342,9 +338,7 @@ int main()
 
         printw( "  Press q to quit." );
 
-#ifdef HILITE_APPLE
         move( apple_y, apple_x );
-#endif
 
         do input = getch(); while( input != 'q' );
     }

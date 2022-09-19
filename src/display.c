@@ -100,6 +100,11 @@ void print_version_number( int y, int x )
     printw( "%cnocolor", first_metadata ? '+' : '.' );
 
     first_metadata = 0;
+
+#elif defined( HILITE_APPLE )
+    printw( "%chilite_apple", first_metadata ? '+' : '.' );
+
+    first_metadata = 0;
 #endif
 
 #if defined( __APPLE__ ) || defined( __MACH__ )
