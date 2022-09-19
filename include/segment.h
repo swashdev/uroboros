@@ -24,19 +24,6 @@ struct segment
 };
 
 
-// Returns whether or not the given `node` is the final node in the list.
-char is_tail( segment *node );
-
-
-// Gets the `next` segment in the list from the `current` segment.
-segment *get_next_segment( segment *current );
-
-
-// Moves the `current` segment to the given `x` and `y` coordinates, and
-// recursively moves all of the segments following it.
-void move_segment( segment *current, int x, int y );
-
-
 // Adds a new segment with the given `x` and `y` values to the `current`
 // segment.
 void add_segment( segment *current, int x, int y );
