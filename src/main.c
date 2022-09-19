@@ -34,7 +34,7 @@ int main()
     start_color();
 
     // Initialize the color pair for the snake.
-    init_pair( 1, COLOR_RED, COLOR_BLACK );
+    init_pair( 1, COLOR_GREEN, COLOR_BLACK );
 
     // Initialize the color pair for the apple.
     init_pair( 2, COLOR_GREEN, COLOR_RED );

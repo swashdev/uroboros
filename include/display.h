@@ -42,7 +42,7 @@
 
 // Color data for the snake & the apple.
 # ifdef COLOR
-#  define COLOR_SNAKE A_BOLD | A_REVERSE | COLOR_PAIR( 1 )
+#  define COLOR_SNAKE A_REVERSE | COLOR_PAIR( 1 )
 # else
 #  define COLOR_SNAKE A_BOLD | A_REVERSE
 # endif
