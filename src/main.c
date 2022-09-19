@@ -222,8 +222,28 @@ int main()
                 break;
 
 
-            // Pressing - or = will decrease or increase the game speed.
+            // Shrink the player.
             case '_':
+#ifdef DEBUG
+                if( player.length > 1 )
+                {
+                    segment *old_tail = player.tail;
+                    mvaddch( old_tail->y, old_tail->x, ' ' );
+                    player.tail = player.tail->previous;
+                    player.tail->next = NULL;
+                    destroy_segment( old_tail );
+                    player.length--;
+                    mvprintw( 0, 0, "Length: %u", player.length );
+                }
+                else
+                {
+                    dead = 1;
+                }
+                break;
+#endif
+
+
+            // Decrease the game speed.
             case '-':
                 if( fps > 1 )
                 {
@@ -245,7 +265,16 @@ int main()
                 break;
 
 
+            // Grow the player.
             case '+':
+#ifdef DEBUG
+                grow_snake( &player );
+                mvprintw( 0, 0, "Length: %u", player.length );
+                break;
+#endif
+
+
+            // Increase the game speed.
             case '=':
                 if( fps < CLOCKS_PER_SEC )
                 {
