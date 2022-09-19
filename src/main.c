@@ -115,6 +115,8 @@ int main()
     signed char direction = INVALID;
     int input = 0;
     char dead = 0;
+    clock_t fps = 10;
+    clock_t delay = CLOCKS_PER_SEC / fps;
 
 
     do
@@ -219,6 +221,52 @@ int main()
                 draw_apple( apple_y, apple_x, player.length );
                 break;
 
+
+            // Pressing - or = will decrease or increase the game speed.
+            case '_':
+            case '-':
+                if( fps > 1 )
+                {
+                    fps--;
+                    delay = CLOCKS_PER_SEC / fps;
+#ifdef DEBUG
+                    mvprintw( 0, 0, "Speed: %u", fps );
+#endif
+                }
+                else
+                {
+                    flash();
+#ifdef DEBUG
+                    attron( A_REVERSE );
+                    mvprintw( 0, 0, "Speed: %u", fps );
+                    attroff( A_REVERSE );
+#endif
+                }
+                break;
+
+
+            case '+':
+            case '=':
+                if( fps < CLOCKS_PER_SEC )
+                {
+                    fps++;
+                    delay = CLOCKS_PER_SEC / fps;
+#ifdef DEBUG
+                    mvprintw( 0, 0, "Speed: %u", fps );
+#endif
+                }
+                else
+                {
+                    flash();
+#ifdef DEBUG
+                    attron( A_REVERSE );
+                    mvprintw( 0, 0, "Speed: %u", fps );
+                    attroff( A_REVERSE );
+#endif
+                }
+                break;
+
+
             case 'h':
             case 'a':
             case KEY_LEFT:
@@ -248,10 +296,7 @@ int main()
 
         // Delay for a given amount of time before continuing.
         clock_t start_time = clock();
-
-        // We'll want the program to run at roughly 10FPS.
-        // TODO: Allow a way to adjust this.
-        while( clock() < start_time + (CLOCKS_PER_SEC / 10) );
+        while( clock() < start_time + delay );
 
     } while( !dead && input != 'q' );
 
