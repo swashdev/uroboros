@@ -30,6 +30,7 @@ int main()
 
     keypad( stdscr, 1 );
 
+#ifdef COLOR
     start_color();
 
     // Initialize the color pair for the snake.
@@ -40,6 +41,7 @@ int main()
 
     // Initialize the color pair for the golden apple.
     init_pair( 3, COLOR_YELLOW, COLOR_YELLOW );
+#endif
 
 
     // Initialize RNG.
@@ -173,7 +175,7 @@ int main()
         draw_apple( apple_y, apple_x, player.length );
         
         attron( COLOR_SNAKE );
-        mvaddch( player.head->y, player.head->x, ' ' );
+        mvaddch( player.head->y, player.head->x, CHAR_SNAKE );
         attroff( COLOR_SNAKE );
 
 #ifdef HILITE_APPLE

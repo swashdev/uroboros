@@ -23,7 +23,7 @@ void draw_apple( int y, int x, unsigned int count )
 
     attron( color );
 
-    mvaddch( y, x, '\'' );
+    mvaddch( y, x, CHAR_APPLE );
 
     attroff( color );
 }
@@ -44,7 +44,7 @@ void draw_snake( struct snake snek )
         x = node->x;
         y = node->y;
 
-        mvaddch( y, x, ' ' );
+        mvaddch( y, x, CHAR_SNAKE );
 
         node = node->next;
     }
@@ -92,6 +92,14 @@ void print_version_number( int y, int x )
 #ifdef DEBUG
     // Debug builds are indicated by a build metadata tag.
     printw( "%cdebug", first_metadata ? '+' : '.'  );
+
+    first_metadata = 0;
+#endif
+
+#ifndef COLOR
+    printw( "%cnocolor", first_metadata ? '+' : '.' );
+
+    first_metadata = 0;
 #endif
 
 #if defined( __APPLE__ ) || defined( __MACH__ )

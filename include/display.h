@@ -17,6 +17,12 @@
 # include "snake.h"
 
 
+// Enable this to enable color.  Makes the game generally look better.
+// Disabling this will cause the game to use alternate characters that should
+// be more visible on displays which don't support color.
+# define COLOR
+
+
 // Enable this to move the terminal cursor over the apple after the screen is
 // drawn.  This can hide the cursor on some terminals and creates less of an
 // eyesore if successful.  It might also reveal the location of the apple even
@@ -24,19 +30,38 @@
 # define HILITE_APPLE
 
 
+// Character data for the snake & the apple.
+# ifdef COLOR
+#  define CHAR_SNAKE ' '
+#  define CHAR_APPLE '\''
+# else
+#  define CHAR_SNAKE '#'
+#  define CHAR_APPLE '%'
+# endif
+
+
 // Color data for the snake & the apple.
-# define COLOR_SNAKE A_BOLD | A_REVERSE | COLOR_PAIR( 1 )
+# ifdef COLOR
+#  define COLOR_SNAKE A_BOLD | A_REVERSE | COLOR_PAIR( 1 )
+# else
+#  define COLOR_SNAKE A_BOLD | A_REVERSE
+# endif
 
 
 // If `HILITE_APPLE` is enabled, the color schemes for the apples will be
 // reversed, unless we're compiling for Windows, because the Windows terminal
 // doesn't work that way.
-# if defined( HILITE_APPLE ) && !defined( _WIN32 )
-#  define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
-#  define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
+# ifndef COLOR
+#  define COLOR_APPLE 0
+#  define COLOR_GOLD  A_BOLD
 # else
-#  define COLOR_APPLE A_BOLD | COLOR_PAIR( 2 )
-#  define COLOR_GOLD  A_BOLD | A_REVERSE | COLOR_PAIR( 3 )
+#  if defined( HILITE_APPLE ) && !defined( _WIN32 )
+#   define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
+#   define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
+#  else
+#   define COLOR_APPLE A_BOLD | COLOR_PAIR( 2 )
+#   define COLOR_GOLD  A_BOLD | A_REVERSE | COLOR_PAIR( 3 )
+#  endif
 # endif
 
 
