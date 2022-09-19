@@ -84,9 +84,14 @@ void print_version_number( int y, int x )
     printw( "-dev.%d", VERSION_BUILD );
 #endif
 
+
+    // Build metadata starts with a + and is separated by . in the semantic
+    // versioning standard, so use a + for the first metadata tag and a . for
+    // the rest.
+    char first_metadata = 1;
 #ifdef DEBUG
     // Debug builds are indicated by a build metadata tag.
-    printw( "+debug" );
+    printw( "%cdebug", first_metadata ? '+' : '.'  );
 #endif
 
 #if defined( __APPLE__ ) || defined( __MACH__ )
