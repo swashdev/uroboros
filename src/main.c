@@ -45,9 +45,7 @@ int main()
 
 
     // Initialize RNG.
-    time_t t;
-
-    unsigned int seed = (unsigned int) time( &t );
+    unsigned int seed = (unsigned int) time( NULL );
 
 #ifdef DEBUG
     mvprintw( 2, 0, "Your lucky number is %u", seed );
