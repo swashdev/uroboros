@@ -25,6 +25,15 @@
 # define VERSION_BUILD 0
 
 
+// The version number expressed as a hexadecimal number, with each of MAJOR,
+// MINOR, and PATCH being given two hexadecimal digits.  This is useful for
+// concisely outputting the version number to a file or quickly comparing two
+// version numbers, but has very little use in user-facing contexts.  Dev build
+// numbers are not considered when factoring in this number.
+# define VERSION_SQUISHED (VERSION_MAJOR << 16) + (VERSION_MINOR << 8) + \
+        VERSION_PATCH
+
+
 // Enable this flag to build a debug version of the program.  Debug versions
 // will give you debug output.
 //# define DEBUG
