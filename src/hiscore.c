@@ -11,6 +11,7 @@
 #include <stdlib.h>
 #include <time.h>
 
+#include "globals.h"
 #include "hiscore.h"
 
 
@@ -114,7 +115,7 @@ int compare_scores( score left, score right )
 
 // Inserts the given `new_score` into the `scores` list, updating `num_scores`.
 // Returns -1 on failure or the index of the inserted score on success.
-int insert_score( score **scores, size_t *num_scores, score new_score )
+int insert_score( score *scores, size_t *num_scores, score new_score )
 {
 
     score new_list[10];
@@ -139,7 +140,7 @@ int insert_score( score **scores, size_t *num_scores, score new_score )
         // If we've already written the new score, we can skip comparisons.
         if( wrote )
         {
-            new_list[count] = (*scores)[index];
+            new_list[count] = scores[index];
 
             // Make sure to advance `index` before continuing.
             index++;
@@ -148,7 +149,7 @@ int insert_score( score **scores, size_t *num_scores, score new_score )
         {
             // For each index in the new array, decide whether to write the new
             // score or the old score.
-            int first = compare_scores( new_score, (*scores)[index] );
+            int first = compare_scores( new_score, scores[index] );
 
             // Only write the new score first if it is SMALLER than the old
             // one.  Equal scores (which should be impossible but w/e) will
@@ -165,7 +166,7 @@ int insert_score( score **scores, size_t *num_scores, score new_score )
             }
             else
             {
-                new_list[count] = (*scores)[index];
+                new_list[count] = scores[index];
 
                 // Advance `index` before continuing.
                 index++;
@@ -178,9 +179,91 @@ int insert_score( score **scores, size_t *num_scores, score new_score )
 
     for( index = 0; index < count; index++ )
     {
-        (*scores)[index] = new_list[index];
+        scores[index] = new_list[index];
     }
 
     return new_index;
+
+}
+
+
+// Writes the high `scores` to the high scores `file`.  Returns a negative
+// error code on failure or 1 on success.
+int write_hiscore_file( FILE *file, score *scores, size_t num_scores )
+{
+
+    // Begin by writing the file format ID number.
+    fprintf( file, "%06x\n", HI_SCORE_FILE_FORMAT );
+
+    // Error codes from writes are stored here.
+    int err;
+
+    // Write each score one at a time.
+    for( size_t index = 0; index < num_scores && index < 10; index++ )
+    {
+        err = write_score( file, scores[index] );
+
+        if( err < 0 )
+        {
+            return err;
+        }
+    }
+
+    return 1;
+
+}
+
+
+// Reads the high scores `file` and updates the `scores` array and `num_scores`
+// counter according to the scores that were found.  Returns a negative error
+// value if the file was not in a compatible format or a 0 for an unknown
+// error; otherwise, returns 1.
+int read_hiscore_file( FILE *file, score *scores, size_t *num_scores )
+{
+
+    int err;
+
+    // Begin by reading the file format ID number so it can be checked.
+    unsigned int format;
+    err = fscanf( file, "%06x\n", &format );
+
+    if( err < 1 )  return 0;
+
+    // Check the file format ID.
+#if VERSION_MAJOR > 1
+    if( VERSION_MAJOR != ((format & 0xff0000) >> 16) )
+#else
+    if( VERSION_MAJOR < ((format & 0xff0000) >> 16) )
+#endif
+    {
+        // If the ID indicates an incompatible format, return an error code.
+        return -1;
+    }
+
+    *num_scores = 0;
+    err = 1;
+    // Read each of the high scores in one at a time, checking the error code
+    // each time.
+    while( err >= 1 && *num_scores < 10 )
+    {
+        err = read_score( file, &scores[*num_scores] );
+
+        // On success, increment the counter.
+        if( err == 1 )
+        {
+            *num_scores += 1;
+        }
+    }
+
+    // If we got an EOF, that's an acceptable error and we can consider that a
+    // success.  Otherwise, return an error code.
+    if( err > 0 || err == EOF )
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 
 }

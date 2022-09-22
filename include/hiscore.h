@@ -61,7 +61,19 @@ int compare_scores( score left, score right );
 
 // Inserts the given `new_score` into the `scores` list, updating `num_scores`.
 // Returns -1 on failure or the index of the inserted score on success.
-int insert_score( score **scores, size_t *num_scores, score new_score );
+int insert_score( score *scores, size_t *num_scores, score new_score );
+
+
+// Writes the high `scores` to the high scores `file`.  Returns a negative
+// error code on failure or 1 on success.
+int write_hiscore_file( FILE *file, score *scores, size_t num_scores );
+
+
+// Reads the high scores `file` and updates the `scores` array and `num_scores`
+// counter according to the scores that were found.  Returns a negative error
+// value if the file was not in a compatible format or a 0 for an unknown
+// error; otherwise, returns 1.
+int read_hiscore_file( FILE *file, score *scores, size_t *num_scores );
 
 
 #endif
