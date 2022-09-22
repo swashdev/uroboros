@@ -113,7 +113,8 @@ int compare_scores( score left, score right )
 
 
 // Inserts the given `new_score` into the `scores` list, updating `num_scores`.
-void insert_score( score **scores, size_t *num_scores, score new_score )
+// Returns -1 on failure or the index of the inserted score on success.
+int insert_score( score **scores, size_t *num_scores, score new_score )
 {
 
     score new_list[10];
@@ -127,6 +128,10 @@ void insert_score( score **scores, size_t *num_scores, score new_score )
     // Assign to 1 when the new score has been written so we can skip
     // future comparisons.
     unsigned char wrote = 0;
+
+    // This value will be assigned to the index of the inserted score, if
+    // insertion is successful.
+    int new_index = -1;
 
     for( ; index < *num_scores && count < 10; count++ )
     {
@@ -152,6 +157,8 @@ void insert_score( score **scores, size_t *num_scores, score new_score )
             {
                 new_list[count] = new_score;
 
+                new_index = (int) count;
+
                 // Mark that we've written the new score so that we can skip
                 // future comparisons.
                 wrote = 1;
@@ -173,5 +180,7 @@ void insert_score( score **scores, size_t *num_scores, score new_score )
     {
         (*scores)[index] = new_list[index];
     }
+
+    return new_index;
 
 }

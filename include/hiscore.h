@@ -53,9 +53,9 @@ int read_score( FILE *file, score *game );
 int compare_scores( score left, score right );
 
 
-// Inserts the given `new_score` into the `scores` list, updating
-// `num_scores`.
-void insert_score( score **scores, size_t *num_scores, score new_score );
+// Inserts the given `new_score` into the `scores` list, updating `num_scores`.
+// Returns -1 on failure or the index of the inserted score on success.
+int insert_score( score **scores, size_t *num_scores, score new_score );
 
 
 #endif
