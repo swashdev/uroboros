@@ -17,6 +17,12 @@
 // This file describes high scores and the methods by which they are stored.
 
 
+// The high score format ID, used to verify that high scores have been saved
+// in a compatible format.  The ID number should be set to the version number
+// that defined the format so that the number is meaningful.
+# define HI_SCORE_FILE_FORMAT 0x000200
+
+
 // This struct describes a single score entered by a player after a game.
 typedef struct score score;
 struct score
