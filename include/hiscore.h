@@ -13,6 +13,8 @@
 
 # include <time.h>
 
+# include "rank.h"
+
 
 // This file describes high scores and the methods by which they are stored.
 
@@ -30,6 +32,9 @@ struct score
 
     // The number of points scored during the recorded game.
     unsigned int points;
+
+    // The ratio of player snake length to max board size.
+    rank_t ratio;
 
     // The elapsed time of the game that was recorded.
     time_t time;

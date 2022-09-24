@@ -20,8 +20,8 @@
 int write_score( FILE *file, score game )
 {
 
-    return fprintf( file, "%u %lu %lu %s\n", game.points, game.time, game.date,
-            game.name );
+    return fprintf( file, "%u %f %lu %lu %s\n", game.points, game.ratio,
+            game.time, game.date, game.name );
 
 }
 
@@ -34,19 +34,23 @@ int read_score( FILE *file, score *game )
 
     unsigned int points = 0;
 
+    rank_t ratio = 0.000f;
+
     time_t time = 0, date = 0;
 
-    int num = fscanf( file, "%u %lu %lu ", &points, &time, &date );
+    int num = fscanf( file, "%u %f %lu %lu ", &points, &ratio, &time,
+            &date );
 
-    // We want to have successfully read in 3 input items, so that's the number
+    // We want to have successfully read in 4 input items, so that's the number
     // to check against.
-    if( num == 3 )
+    if( num == 4 )
     {
         // Assume that space for `game` has already been allocated.  I know
         // that's dangerous or whatever, but this function is used specifically
         // to fill arrays, so it should already be allocated anyway.
 
         game->points = points;
+        game->ratio = ratio;
         game->time = time;
         game->date = date;
 
@@ -99,12 +103,22 @@ int read_score( FILE *file, score *game )
 int compare_scores( score left, score right )
 {
 
-    // High scores are sorted by points first, then time, then date.
+    // High scores are sorted by points first, then ratio, then time, then
+    // date.
     if( left.points > right.points )
     {
         return -1;
     }
     else if( left.points < right.points )
+    {
+        return +1;
+    }
+
+    if( left.ratio > right.ratio )
+    {
+        return -1;
+    }
+    else if( left.ratio < right.ratio )
     {
         return +1;
     }
