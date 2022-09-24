@@ -38,7 +38,7 @@ struct score
     time_t date;
 
     // The name of the player.
-    char *name;
+    char name[21];
 
 };
 

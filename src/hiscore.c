@@ -36,13 +36,11 @@ int read_score( FILE *file, score *game )
 
     time_t time = 0, date = 0;
 
-    char *name = 0;
+    int num = fscanf( file, "%u %lu %lu ", &points, &time, &date );
 
-    int num = fscanf( file, "%u %lu %lu %s\n", &points, &time, &date, name );
-
-    // We want to have successfully read in 4 input items, so that's the number
+    // We want to have successfully read in 3 input items, so that's the number
     // to check against.
-    if( num == 4 )
+    if( num == 3 )
     {
         // Assume that space for `game` has already been allocated.  I know
         // that's dangerous or whatever, but this function is used specifically
@@ -51,7 +49,28 @@ int read_score( FILE *file, score *game )
         game->points = points;
         game->time = time;
         game->date = date;
-        game->name = name;
+
+        // Now we need to read in the player's name  We'll read in up to 20
+        // characters, terminating either on newline or when that limit is
+        // reached.  Either way, the read head will be advanced until either a
+        // newline or EOF is reached.
+        int letter;
+        size_t index = 0;
+        do
+        {
+
+            letter = fgetc( file );
+
+            if( index < 20 && letter != '\n' && letter != EOF )
+            {
+                game->name[index] = (char) letter;
+                index += 1;
+            }
+
+        } while( letter != '\n' && letter != EOF );
+
+        // Terminate the player's name with a null character.
+        game->name[index] = '\0';
 
         // Return a 1 to mark success.
         return 1;
