@@ -207,6 +207,15 @@ int insert_score( score *scores, size_t *num_scores, score new_score )
         }
     }
 
+    // If the player's score wasn't written, but the list is short enough to
+    // accomodate one more score, insert it now.
+    if( !wrote && *num_scores < 10 )
+    {
+        new_list[count] = new_score;
+        new_index = (int) count;
+        count += 1;
+    }
+
     // Overwrite the old `scores` list and update `num_scores`.
     *num_scores = count;
 
