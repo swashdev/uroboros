@@ -17,6 +17,8 @@
 #include "segment.h"
 #include "snake.h"
 #include "display.h"
+#include "rank.h"
+#include "hiscore.h"
 
 
 int main()
@@ -117,10 +119,17 @@ int main()
     char dead = 0;
     clock_t fps = 10;
     clock_t delay = CLOCKS_PER_SEC / fps;
+    clock_t frame_time;
+
+
+    // Start the timer.
+    time_t start_time = time( NULL );
 
 
     do
     {
+
+        frame_time = clock();
 
         // Move the player.
         if( direction != INVALID )
@@ -320,10 +329,13 @@ int main()
 
 
         // Delay for a given amount of time before continuing.
-        clock_t start_time = clock();
-        while( clock() < start_time + delay );
+        while( clock() < frame_time + delay );
 
     } while( !dead && input != 'q' );
+
+
+    // Stop the timer.
+    time_t end_time = time( NULL );
 
 
     // If the player has died, draw its corpse and wait for a quit.
@@ -343,9 +355,108 @@ int main()
         do input = getch(); while( input != 'q' );
     }
 
+    unsigned int final_length = player.length;
+    unsigned int points = final_length > 0 ? final_length - 1 : 0;
+
     destroy_snake( &player );
 
     endwin();
+
+    // Check the high scores file.
+    if( dead )
+    {
+        score game;
+        game.points = points;
+        game.ratio = get_rank( final_length, (unsigned int) (max_y * max_x) );
+        game.time = end_time - start_time;
+        game.date = end_time;
+
+        // For now, give the player a placeholder name.
+        for( size_t index = 0; index <= 20; index++ )
+        {
+            game.name[index] = "anon ..............."[index];
+        }
+
+        score *scores = (score*) malloc( 10 * sizeof( score ) );
+        size_t num_scores = 0;
+        int row = -1;
+
+        // Open the hiscore file for reading.
+        FILE *hiscore = fopen( "hiscore", "r" );
+
+        // If the hiscore file wasn't read, our job has been made very easy.
+        if( hiscore == NULL )
+        {
+            scores[0] = game;
+            num_scores = 1;
+            row = 0;
+        }
+        else
+        {
+            // Read the hiscore file.
+            int err = read_hiscore_file( hiscore, scores, &num_scores );
+
+            // We can close the file immediately.
+            fclose( hiscore );
+
+            // Try to add the player's current score.
+            row = insert_score( scores, &num_scores, game );
+        }
+
+        // If the player's score was inserted, prompt for a name and update
+        // the hiscore entry.
+        if( row >= 0 )
+        {
+            puts( "You made the top ten!  Please, enter your name!" );
+            char name[21];
+            fgets( name, 20, stdin );
+            if( name[0] != '\0' && name[0] != '\n' )
+            {
+                char end = 0;
+                for( size_t index = 0; index < 20; index++ )
+                {
+                    if( name[index] == '\0' || name[index] == '\n' )
+                    {
+                        scores[row].name[index] = ' ';
+                        index = 21;
+                    }
+                    else
+                    {
+                        scores[row].name[index] = name[index];
+                    }
+                }
+            }
+        }
+
+        if( num_scores > 0 )
+        {
+            // Display the high scores list.
+            puts( "No. Name                 Points   Time     Rank" );
+
+            char *rank;
+
+            for( size_t index = 0; index < num_scores; index++ )
+            {
+                score current = scores[index];
+                get_rank_name( &rank, current.ratio );
+                printf( "%2lu) %-20s %-8u %-8lu %s\n", index + 1,
+                        current.name, current.points, current.time, rank );
+            }
+        }
+
+        // If the player made the high scores list, we have to write it anew.
+        if( row >= 0 )
+        {
+            hiscore = fopen( "hiscore", "w" );
+
+            write_hiscore_file( hiscore, scores, num_scores );
+
+            fclose( hiscore );
+        }
+
+        free( scores );
+
+    } // if( dead )
 
     return 0;
 }
