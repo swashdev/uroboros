@@ -59,7 +59,7 @@ able to figure it out with some simple Internet searches.
 
 Uroboros can be compiled via a single gcc command like so:
 ```
-gcc -I include src/segment.c src/snake.c src/display.c src/main.c -o uroboros -lncurses
+gcc -I include src/segment.c src/snake.c src/display.c src/rank.c src/hiscore.c src/main.c -o uroboros -lncurses
 ```
 
 For Windows I've been able to successfully use MinGW, although I've found that
