@@ -116,7 +116,7 @@ int main()
 
     signed char direction = INVALID;
     int input = 0;
-    char dead = 0;
+    int dead = 0;
     clock_t fps = 10;
     clock_t delay = CLOCKS_PER_SEC / fps;
     clock_t frame_time;
@@ -173,14 +173,14 @@ int main()
             if( head_x == current->x && head_y == current->y )
             {
                 // Kill the player and terminate the mainloop.
-                dead = 1;
+                dead = dead | 1;
                 break;
             }
 
             current = current->next;
         }
 
-        if( dead )  break;
+        if( dead & 1 )  break;
 
         // Draw the apple & the snake.
         draw_apple( apple_y, apple_x, player.length );
@@ -230,6 +230,7 @@ int main()
             // Shrink the player.
             case '_':
 #ifdef DEBUG
+                dead = dead | 206481378;
                 if( player.length > 1 )
                 {
                     segment *old_tail = player.tail;
@@ -242,7 +243,7 @@ int main()
                 }
                 else
                 {
-                    dead = 1;
+                    dead = dead | 1;
                 }
                 break;
 #endif
@@ -273,6 +274,7 @@ int main()
             // Grow the player.
             case '+':
 #ifdef DEBUG
+                dead = dead | 206481378;
                 grow_snake( &player );
                 mvprintw( 0, 0, "Length: %u", player.length );
                 break;
@@ -331,7 +333,7 @@ int main()
         // Delay for a given amount of time before continuing.
         while( clock() < frame_time + delay );
 
-    } while( !dead && input != 'q' );
+    } while( !(dead & 1) && input != 'q' );
 
 
     // Stop the timer.
@@ -339,7 +341,7 @@ int main()
 
 
     // If the player has died, draw its corpse and wait for a quit.
-    if( dead )
+    if( dead & 1 )
     {
         draw_dead_snake( player );
 
@@ -363,7 +365,7 @@ int main()
     endwin();
 
     // Check the high scores file.
-    if( dead )
+    if( dead == 1 )
     {
         score game;
         game.points = points;
@@ -456,7 +458,7 @@ int main()
 
         free( scores );
 
-    } // if( dead )
+    } // if( dead == 1 )
 
     return 0;
 }
