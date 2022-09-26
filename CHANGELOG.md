@@ -12,6 +12,14 @@ indicated by a "-dev" suffix followed by a number.  Dev builds are generally
 not documented in this file unless special circumstances require it.
 
 
+## [Unreleased]
+
+### Added
+
+- High scores!  Qualifying players can now add their name to a "top 10" list
+  that they can use to gloat to other players!
+
+
 ## [0.1.0] - 2022-09-19
 
 ### Added
