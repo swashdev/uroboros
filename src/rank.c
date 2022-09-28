@@ -17,13 +17,15 @@
 // copies an appropriate string into `str`.
 rank_t get_rank( unsigned int length, unsigned int max )
 {
+    // Return 1.000f (Uroboros) for a perfect score.
     if( length == max )
     {
         return 1.00f;
     }
-    else if( length < 5 )
+    // Return -1.000f (Glycon) for an impossible score.
+    else if( length < 5 || length > max )
     {
-        return 0.00f;
+        return -1.00f;
     }
 
     // The player's rank is based on the ratio of their length to the maximum
@@ -39,7 +41,11 @@ rank_t get_rank( unsigned int length, unsigned int max )
 void get_rank_name( char **str, rank_t rank )
 {
 
-    if( rank >= 1.00f )
+    if( rank > UROBOROS || rank < DIRT )
+    {
+        *str = "Glycon";
+    }
+    else if( rank == UROBOROS )
     {
         *str = "Uroboros";
     }
@@ -86,10 +92,6 @@ void get_rank_name( char **str, rank_t rank )
     else if( rank >= DIRT )
     {
         *str = "Dirt";
-    }
-    else
-    {
-        *str = "DNQ";
     }
 
 }
