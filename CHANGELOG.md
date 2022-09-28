@@ -21,6 +21,10 @@ not documented in this file unless special circumstances require it.
 
 - Debug output will now include the player's ratio along with their length.
 
+### Changed
+
+- The license disclosure window is now centered.
+
 
 ## [0.1.0] - 2022-09-19
 

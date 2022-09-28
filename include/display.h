@@ -14,6 +14,8 @@
 // This header file declares functions related to display code.
 
 
+# include "curses.h"
+
 # include "snake.h"
 
 
@@ -61,6 +63,11 @@
 #   define COLOR_GOLD  A_BOLD | A_REVERSE | COLOR_PAIR( 3 )
 #  endif
 # endif
+
+
+// Creates a curses window that's centered on the screen.
+#define centered_window( height, width ) \
+    newwin( height, width, (max_y - height) / 2, (max_x - width) / 2 )
 
 
 // Draws the snake.

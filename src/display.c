@@ -118,7 +118,7 @@ void print_version_number( int y, int x )
 void display_license_agreement()
 {
 
-    WINDOW *w = newwin( 12, 80, 0, 0 );
+    WINDOW *w = centered_window( 12, 80 );
 
     box( w, 0, 0 );
 
