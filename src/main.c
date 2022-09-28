@@ -143,7 +143,8 @@ int main()
             // Add a segment to the snake.
             grow_snake( &player );
 #ifdef DEBUG
-            mvprintw( 0, 0, "Length: %u", player.length );
+            mvprintw( 0, 0, "Length: %u, ratio: %.3f",
+                    player.length, get_rank( player.length, (max_x * max_y) ) );
 #endif
 
             // Move the apple.

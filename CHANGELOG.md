@@ -19,6 +19,8 @@ not documented in this file unless special circumstances require it.
 - High scores!  Qualifying players can now add their name to a "top 10" list
   that they can use to gloat to other players!
 
+- Debug output will now include the player's ratio along with their length.
+
 
 ## [0.1.0] - 2022-09-19
 
