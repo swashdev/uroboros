@@ -47,14 +47,6 @@ void get_rank_name( char **str, rank_t rank )
     {
         *str = "Atum";
     }
-    else if( rank >= SHESHNAG )
-    {
-        *str = "Sheshnag";
-    }
-    else if( rank >= MERETSEGERE )
-    {
-        *str = "Meretsegere";
-    }
     else if( rank >= NIDHOGG )
     {
         *str = "Nidhogg";
@@ -63,49 +55,17 @@ void get_rank_name( char **str, rank_t rank )
     {
         *str = "Quetzalcoatl";
     }
-    else if( rank >= NEHUSTAN )
-    {
-        *str = "Nehustan";
-    }
-    else if( rank >= GLYCON )
-    {
-        *str = "Glycon";
-    }
     else if( rank >= WYRM )
     {
         *str = "Wyrm";
-    }
-    else if( rank >= ECHIDNA )
-    {
-        *str = "Echidna";
     }
     else if( rank >= SNALLYGASTER )
     {
         *str = "Snallygaster";
     }
-    else if( rank >= SNOW )
-    {
-        *str = "Snow Snake";
-    }
-    else if( rank >= HOOP )
-    {
-        *str = "Hoop Snake";
-    }
-    else if( rank >= LUCIA )
-    {
-        *str = "Saint Lucia Racer";
-    }
-    else if( rank >= VIPER )
-    {
-        *str = "Horned Viper";
-    }
     else if( rank >= KING )
     {
         *str = "King Cobra";
-    }
-    else if( rank >= COBRA )
-    {
-        *str = "Cobra";
     }
     else if( rank >= PYTHON )
     {

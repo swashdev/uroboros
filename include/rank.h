@@ -28,28 +28,18 @@ void get_rank_name( char **str, rank_t rank );
 // Each rank is a floating-point value.  Scores >= that value qualify for the
 // rank.  Uroboros is reserved only for perfect scores.  Negative values are
 // special-cased.
-# define DIRT         0.00f
-# define WORM         0.01f
-# define SNAKE        0.05f
-# define RATTLER      0.10f
-# define PYTHON       0.15f
-# define COBRA        0.20f
-# define KING         0.25f
-# define VIPER        0.30f
-# define LUCIA        0.35f
-# define HOOP         0.40f
-# define SNOW         0.45f
-# define SNALLYGASTER 0.50f
-# define ECHIDNA      0.55f
-# define WYRM         0.60f
-# define GLYCON       0.65f
-# define NEHUSTAN     0.70f
-# define QUETZALCOATL 0.75f
-# define NIDHOGG      0.80f
-# define MERETSEGERE  0.85f
-# define SHESHNAG     0.90f
-# define ATUM         0.95f
-# define UROBOROS     1.00f
+# define DIRT         0.000f
+# define WORM         0.010f
+# define SNAKE        0.025f
+# define RATTLER      0.050f
+# define PYTHON       0.075f
+# define KING         0.100f
+# define SNALLYGASTER 0.250f
+# define WYRM         0.500f
+# define QUETZALCOATL 0.750f
+# define NIDHOGG      0.900f
+# define ATUM         0.950f
+# define UROBOROS     1.000f
 
 
 #endif
