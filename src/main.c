@@ -128,6 +128,9 @@ int main()
     move( apple_y, apple_x );
     do{ input = getch(); } while( input == ERR );
 
+    // Clear the unnecessary text.
+    clear();
+
 
     // Start the timer.
     time_t start_time = time( NULL );

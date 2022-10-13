@@ -24,6 +24,8 @@ not documented in this file unless special circumstances require it.
 - Player names are no longer stored with a bunch of dots in the high scores
   file.
 
+- The helpful text is now cleared off of the screen when the game begins.
+
 ### Fixed
 
 - The terminal will no longer refuse to echo input after quitting the game.
