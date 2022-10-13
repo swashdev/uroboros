@@ -29,6 +29,10 @@ not documented in this file unless special circumstances require it.
 - The terminal will no longer refuse to echo input after quitting the game.
   I still don't know why that happened, but it's fixed now.
 
+- The first apple will no longer spawn on the same line as the version number,
+  to prevent the "Eat these" message from interfering with the version number
+  and vice-versa.
+
 
 ## [0.2.0] - 2022-10-13
 

@@ -90,7 +90,7 @@ int main()
     do
     {
         apple_x = rand() % max_x;
-        apple_y = 1 + (rand() % (max_y - 1));
+        apple_y = 1 + (rand() % (max_y - 2));
     } while( apple_y == player.head->y );
 
 #ifdef DEBUG
