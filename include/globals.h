@@ -21,8 +21,8 @@
 // development teams and production quality.
 # define VERSION_MAJOR 0
 # define VERSION_MINOR 2
-# define VERSION_PATCH 0
-# define VERSION_BUILD 0
+# define VERSION_PATCH 1
+# define VERSION_BUILD 1
 
 
 // The version number expressed as a hexadecimal number, with each of MAJOR,
