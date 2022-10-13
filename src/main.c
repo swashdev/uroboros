@@ -122,7 +122,10 @@ int main()
     clock_t frame_time;
 
 
-    // Wait for user input.
+    // Display the player & apple and wait for user input.
+    draw_snake( player );
+    draw_apple( apple_y, apple_x, 1 );
+    move( apple_y, apple_x );
     do{ input = getch(); } while( input == ERR );
 
 
