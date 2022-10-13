@@ -357,19 +357,23 @@ int main()
 
         if( player.length <= 4 )  printw( "  Wow, how did you even do that?" );
 
+        // Make sure to refresh the screen so that these elements don't get
+        // drawn over the high scores list.
+        refresh();
+#if 0
         printw( "  Press q to quit." );
 
         move( apple_y, apple_x );
 
         do input = getch(); while( input != 'q' );
+#endif
+
     }
 
     unsigned int final_length = player.length;
     unsigned int points = final_length > 0 ? final_length - 1 : 0;
 
     destroy_snake( &player );
-
-    endwin();
 
     // Check the high scores file.
     if( dead == 1 )
@@ -412,35 +416,21 @@ int main()
             row = insert_score( scores, &num_scores, game );
         }
 
-        // If the player's score was inserted, prompt for a name and update
-        // the hiscore entry.
-        if( row >= 0 )
-        {
-            puts( "You made the top ten!  Please, enter your name!" );
-            char name[21];
-            fgets( name, 20, stdin );
-            if( name[0] != '\0' && name[0] != '\n' )
-            {
-                char end = 0;
-                for( size_t index = 0; index < 20; index++ )
-                {
-                    if( name[index] == '\0' || name[index] == '\n' )
-                    {
-                        scores[row].name[index] = ' ';
-                        index = 21;
-                    }
-                    else
-                    {
-                        scores[row].name[index] = name[index];
-                    }
-                }
-            }
-        }
 
         if( num_scores > 0 )
         {
+
+            // Create a window to store the high scores in.
+            // NOTE: for reasons which will forever baffle me, the game doesn't place the window
+            // at the correct y coordinate unless you store it in a variable first, resulting in
+            // the window being half-buried beneath the boundaries of the displayable window.
+            int height = 7 + (int) num_scores, width = 59;
+            WINDOW *w = centered_window( height, width );
+            box( w, 0, 0 );
+
             // Display the high scores list.
-            puts( "No. Name                 Points   Time     Rank" );
+            mvwprintw( w, 3, 2,  "No. Name                 Points   Time" );
+            wprintw( w, "     Rank" );
 
             char *rank;
 
@@ -448,9 +438,40 @@ int main()
             {
                 score current = scores[index];
                 get_rank_name( &rank, current.ratio );
-                printf( "%2lu) %-20s %-8u %-8lu %s\n", index + 1,
+
+                mvwprintw( w, 4 + (int) index, 2, "%2lu) %-20s %-8u %-8lu %s",
+                        index + 1,
                         current.name, current.points, current.time, rank );
             }
+
+            // If the player made the high scores list, get their name.
+            if( row >= 0 )
+            {
+
+                mvwprintw( w, 1, 2, "You made the top ten!  " );
+                wprintw( w, "Please, enter your name!" );
+                wrefresh( w );
+                echo();
+                mvwgetstr( w, 4 + row, 6, scores[row].name );
+                noecho();
+
+            }
+            else
+            {
+
+                mvwprintw( w, 1, 2, "Sorry, looks like you didn't make " );
+                wprintw( w, "the top ten." );
+
+            }
+
+            mvwprintw( w, 5 + (int) num_scores, 2, "Press q to quit." );
+            wmove( w, 5 + (int) num_scores, 8 );
+            wrefresh( w );
+
+            while( getch() != 'q' );
+
+            delwin( w );
+
         }
 
         // If the player made the high scores list, we have to write it anew.
@@ -466,6 +487,9 @@ int main()
         free( scores );
 
     } // if( dead == 1 )
+
+    // Stop curses.
+    endwin();
 
     return 0;
 }

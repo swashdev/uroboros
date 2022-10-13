@@ -14,6 +14,11 @@ not documented in this file unless special circumstances require it.
 
 ## [Unreleased]
 
+### Added
+
+- An in-game high scores window will now be displayed, rather than outputting
+  the high scores to the terminal after the game closes.
+
 ### Changed
 
 - Player names are no longer stored with a bunch of dots in the high scores
