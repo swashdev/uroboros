@@ -397,10 +397,7 @@ int main()
         game.date = end_time;
 
         // For now, give the player a placeholder name.
-        for( size_t index = 0; index <= 20; index++ )
-        {
-            game.name[index] = index > 3 ? '\0' : "anon"[index];
-        }
+        game.name[0] = '\0';
 
         score *scores = (score*) malloc( 10 * sizeof( score ) );
         size_t num_scores = 0;
@@ -460,12 +457,38 @@ int main()
             if( row >= 0 )
             {
 
+                char name[21];
+
                 mvwprintw( w, 1, 2, "You made the top ten!  " );
                 wprintw( w, "Please, enter your name!" );
                 wrefresh( w );
                 echo();
-                mvwgetstr( w, 4 + row, 6, scores[row].name );
+                mvwgetstr( w, 4 + row, 6, name );
                 noecho();
+
+                // If the player did not enter a name, give them a placeholder.
+                size_t letter;
+                if( name[0] == '\0' )
+                {
+
+                    for( letter = 0; letter < 4; letter++ )
+                    {
+                        scores[row].name[letter] = "anon"[letter];
+                    }
+
+                }
+                else
+                {
+
+                    for( letter = 0; letter < 20 && name[letter] != '\0';
+                            letter++ )
+                    {
+                        scores[row].name[letter] = name[letter];
+                    }
+
+                }
+
+                scores[row].name[letter] = '\0';
 
             }
             else
