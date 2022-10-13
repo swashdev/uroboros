@@ -328,6 +328,12 @@ int main()
                 if( direction != LEFT )  direction = RIGHT;
                 break;
 
+            case KEY_DC:
+            case KEY_BACKSPACE:
+                attron( COLOR_PAIR( 3 ) );
+                mvaddch( player.ghost_y, player.ghost_x, ' ' );
+                attroff( COLOR_PAIR( 3 ) );
+
         } // switch( input )
 
 
