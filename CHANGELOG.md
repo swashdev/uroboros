@@ -12,6 +12,14 @@ indicated by a "-dev" suffix followed by a number.  Dev builds are generally
 not documented in this file unless special circumstances require it.
 
 
+## [Unreleased]
+
+### Changed
+
+- Player names are no longer stored with a bunch of dots in the high scores
+  file.
+
+
 ## [0.2.0] - 2022-10-13
 
 ### Added

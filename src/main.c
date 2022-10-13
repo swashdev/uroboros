@@ -383,7 +383,7 @@ int main()
         // For now, give the player a placeholder name.
         for( size_t index = 0; index <= 20; index++ )
         {
-            game.name[index] = "anon ..............."[index];
+            game.name[index] = index > 3 ? '\0' : "anon"[index];
         }
 
         score *scores = (score*) malloc( 10 * sizeof( score ) );
