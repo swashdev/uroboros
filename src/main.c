@@ -490,6 +490,16 @@ int main()
 
                 scores[row].name[letter] = '\0';
 
+#ifdef __WIN32
+                // For Windows builds, re-output the high score data since
+                // the Windows terminal likes to clear text data on the line
+                // following the name input.
+                get_rank_name( &rank, scores[row].ratio );
+                mvwprintw( w, 4 + row, 27, "%-8u %-8lu %s",
+                        scores[row].points, scores[row].time, rank );
+                box( w, 0, 0 );
+#endif
+
             }
             else
             {

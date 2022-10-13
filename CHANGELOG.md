@@ -12,6 +12,15 @@ indicated by a "-dev" suffix followed by a number.  Dev builds are generally
 not documented in this file unless special circumstances require it.
 
 
+## [Unreleased]
+
+### Fixed
+
+- On Windows, the player's score data is output a second time after entering
+  their name, to fix a problem introduced by the Windows terminal clearing all
+  text data after the name input.
+
+
 ## [0.2.1] - 2022-10-13
 
 ### Added
