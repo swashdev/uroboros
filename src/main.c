@@ -138,70 +138,7 @@ int main()
 
         frame_time = clock();
 
-        // Move the player.
-        if( direction != INVALID )
-        {
-            move_snake( &player, direction );
-        }
-
-        // Check if the player ate an apple.
-        if( player.head->x == apple_x && player.head->y == apple_y )
-        {
-            // Add a segment to the snake.
-            grow_snake( &player );
-#ifdef DEBUG
-            mvprintw( 0, 0, "Length: %u, ratio: %.3f",
-                    player.length, get_rank( player.length, (max_x * max_y) ) );
-#endif
-
-            // Move the apple.
-            do
-            {
-                apple_x = rand() % max_x;
-                apple_y = rand() % max_y;
-
-#ifdef DEBUG
-                mvprintw( 1, 0, "Apple spawned at coords %03d, %03d",
-                        apple_x, apple_y );
-#endif
-            } while( apple_x == player.head->x && apple_y == player.head->y );
-        }
-        // If the player did NOT eat an apple, erase the spot where the new
-        // segment would have been.
-        else
-        {
-            mvaddch( player.ghost_y, player.ghost_x, ' ' );
-        }
-
-        // Check if the player bit themself.
-        int head_x = player.head->x, head_y = player.head->y;
-        segment *current = player.head->next;
-        while( current != NULL )
-        {
-            if( head_x == current->x && head_y == current->y )
-            {
-                // Kill the player and terminate the mainloop.
-                dead = dead | 1;
-                break;
-            }
-
-            current = current->next;
-        }
-
-        if( dead & 1 )  break;
-
-        // Draw the apple & the snake.
-        draw_apple( apple_y, apple_x, player.length );
-        
-        attron( COLOR_SNAKE );
-        mvaddch( player.head->y, player.head->x, CHAR_SNAKE );
-        attroff( COLOR_SNAKE );
-
-        move( apple_y, apple_x );
-
-        // Get input.
-        input = getch();
-
+        // Check input.
         switch( input )
         {
 
@@ -342,6 +279,71 @@ int main()
                 attroff( COLOR_PAIR( 3 ) );
 
         } // switch( input )
+
+
+        // Move the player.
+        if( direction != INVALID )
+        {
+            move_snake( &player, direction );
+        }
+
+        // Check if the player ate an apple.
+        if( player.head->x == apple_x && player.head->y == apple_y )
+        {
+            // Add a segment to the snake.
+            grow_snake( &player );
+#ifdef DEBUG
+            mvprintw( 0, 0, "Length: %u, ratio: %.3f",
+                    player.length, get_rank( player.length, (max_x * max_y) ) );
+#endif
+
+            // Move the apple.
+            do
+            {
+                apple_x = rand() % max_x;
+                apple_y = rand() % max_y;
+
+#ifdef DEBUG
+                mvprintw( 1, 0, "Apple spawned at coords %03d, %03d",
+                        apple_x, apple_y );
+#endif
+            } while( apple_x == player.head->x && apple_y == player.head->y );
+        }
+        // If the player did NOT eat an apple, erase the spot where the new
+        // segment would have been.
+        else
+        {
+            mvaddch( player.ghost_y, player.ghost_x, ' ' );
+        }
+
+        // Check if the player bit themself.
+        int head_x = player.head->x, head_y = player.head->y;
+        segment *current = player.head->next;
+        while( current != NULL )
+        {
+            if( head_x == current->x && head_y == current->y )
+            {
+                // Kill the player and terminate the mainloop.
+                dead = dead | 1;
+                break;
+            }
+
+            current = current->next;
+        }
+
+        if( dead & 1 )  break;
+
+        // Draw the apple & the snake.
+        draw_apple( apple_y, apple_x, player.length );
+        
+        attron( COLOR_SNAKE );
+        mvaddch( player.head->y, player.head->x, CHAR_SNAKE );
+        attroff( COLOR_SNAKE );
+
+        move( apple_y, apple_x );
+
+        // Get input.
+        input = getch();
 
 
         // Delay for a given amount of time before continuing.
