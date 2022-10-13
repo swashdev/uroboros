@@ -489,6 +489,7 @@ int main()
     } // if( dead == 1 )
 
     // Stop curses.
+    echo();
     endwin();
 
     return 0;

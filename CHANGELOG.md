@@ -24,6 +24,11 @@ not documented in this file unless special circumstances require it.
 - Player names are no longer stored with a bunch of dots in the high scores
   file.
 
+### Fixed
+
+- The terminal will no longer refuse to echo input after quitting the game.
+  I still don't know why that happened, but it's fixed now.
+
 
 ## [0.2.0] - 2022-10-13
 
