@@ -122,6 +122,10 @@ int main()
     clock_t frame_time;
 
 
+    // Wait for user input.
+    do{ input = getch(); } while( input == ERR );
+
+
     // Start the timer.
     time_t start_time = time( NULL );
 

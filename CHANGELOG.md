@@ -33,6 +33,10 @@ not documented in this file unless special circumstances require it.
   to prevent the "Eat these" message from interfering with the version number
   and vice-versa.
 
+- The timer now doesn't start until the player presses a key, so they can wait
+  for as long as they want to start playing without their high score being
+  affected.
+
 
 ## [0.2.0] - 2022-10-13
 
