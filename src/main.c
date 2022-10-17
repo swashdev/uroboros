@@ -76,10 +76,8 @@ int main()
     player.length = 1;
 
 
-#if defined( DEBUG ) || VERSION_BUILD > 0 || VERSION_MAJOR < 1
     // Print the version number.
     print_version_number( max_y - 1, 0 );
-#endif
 
 
     // Assign coordinates for the apple.
