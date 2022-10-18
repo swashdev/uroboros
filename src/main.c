@@ -428,9 +428,10 @@ int main()
         {
 
             // Create a window to store the high scores in.
-            // NOTE: for reasons which will forever baffle me, the game doesn't place the window
-            // at the correct y coordinate unless you store it in a variable first, resulting in
-            // the window being half-buried beneath the boundaries of the displayable window.
+            // NOTE: for reasons which will forever baffle me, the game doesn't
+            // place the window at the correct y coordinate unless you store it
+            // in a variable first, resulting in the window being half-buried
+            // beneath the boundaries of the displayable window.
             int height = 7 + (int) num_scores, width = 59;
             WINDOW *w = centered_window( height, width );
             box( w, 0, 0 );
