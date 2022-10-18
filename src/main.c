@@ -139,6 +139,13 @@ int main()
 
         frame_time = clock();
 
+#ifdef DEBUG
+        if( input != ERR )
+        {
+            mvprintw( max_y - 1, 0, keyname( input ) );
+        }
+#endif
+
         // Check input.
         switch( input )
         {

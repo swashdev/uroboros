@@ -19,6 +19,9 @@ not documented in this file unless special circumstances require it.
 - The game now displays a message on the high scores table if it detects
   cheating.
 
+- Debug builds now have a small message informing you of the identity of a key
+  that has been pressed.
+
 ### Changed
 
 - The version number is now always displayed when the game is started, rather
