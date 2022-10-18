@@ -142,7 +142,7 @@ int main()
 #ifdef DEBUG
         if( input != ERR )
         {
-            mvprintw( max_y - 1, 0, keyname( input ) );
+            mvprintw( max_y - 1, 0, "%-15s", keyname( input ) );
         }
 #endif
 
