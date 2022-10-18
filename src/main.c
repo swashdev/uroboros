@@ -362,21 +362,9 @@ int main()
     {
         draw_dead_snake( player );
 
-        mvprintw( 0, 0, "Whoops!  You died with %d points.",
-                player.length - 1 );
-
-        if( player.length <= 4 )  printw( "  Wow, how did you even do that?" );
-
         // Make sure to refresh the screen so that these elements don't get
         // drawn over the high scores list.
         refresh();
-#if 0
-        printw( "  Press q to quit." );
-
-        move( apple_y, apple_x );
-
-        do input = getch(); while( input != 'q' );
-#endif
 
     }
 
@@ -436,12 +424,17 @@ int main()
             // place the window at the correct y coordinate unless you store it
             // in a variable first, resulting in the window being half-buried
             // beneath the boundaries of the displayable window.
-            int height = 7 + (int) num_scores, width = 59;
+            int height = 8 + (int) num_scores, width = 59;
             WINDOW *w = centered_window( height, width );
             box( w, 0, 0 );
+            mvwprintw( w, 1, 2, "You died with %d points.", game.points );
+            if( game.points < 4 )
+            {
+                wprintw( w, "  Wow, how did you even do that?" );
+            }
 
             // Display the high scores list.
-            mvwprintw( w, 3, 2,  "No. Name                 Points   Time" );
+            mvwprintw( w, 4, 2,  "No. Name                 Points   Time" );
             wprintw( w, "     Rank" );
 
             char *rank;
@@ -451,7 +444,7 @@ int main()
                 score current = scores[index];
                 get_rank_name( &rank, current.ratio );
 
-                mvwprintw( w, 4 + (int) index, 2, "%2lu) %-20s %-8u %-8lu %s",
+                mvwprintw( w, 5 + (int) index, 2, "%2lu) %-20s %-8u %-8lu %s",
                         index + 1,
                         current.name, current.points, current.time, rank );
             }
@@ -462,11 +455,11 @@ int main()
 
                 char name[21];
 
-                mvwprintw( w, 1, 2, "You made the top ten!  " );
+                mvwprintw( w, 2, 2, "You made the top ten!  " );
                 wprintw( w, "Please, enter your name!" );
                 wrefresh( w );
                 echo();
-                mvwgetstr( w, 4 + row, 6, name );
+                mvwgetstr( w, 5 + row, 6, name );
                 noecho();
 
                 // If the player did not enter a name, give them a placeholder.
@@ -498,7 +491,7 @@ int main()
                 // the Windows terminal likes to clear text data on the line
                 // following the name input.
                 get_rank_name( &rank, scores[row].ratio );
-                mvwprintw( w, 4 + row, 27, "%-8u %-8lu %s",
+                mvwprintw( w, 5 + row, 27, "%-8u %-8lu %s",
                         scores[row].points, scores[row].time, rank );
                 box( w, 0, 0 );
 #endif
@@ -510,18 +503,18 @@ int main()
                 // If the player cheated, admonish them.
                 if( dead & 206481378 )
                 {
-                    mvwprintw( w, 1, 2, "Sorry, cheaters never prosper." );
+                    mvwprintw( w, 2, 2, "Sorry, cheaters never prosper." );
                 }
                 else
                 {
-                    mvwprintw( w, 1, 2, "Sorry, looks like you didn't make " );
+                    mvwprintw( w, 2, 2, "Sorry, looks like you didn't make " );
                     wprintw( w, "the top ten." );
                 }
 
             }
 
-            mvwprintw( w, 5 + (int) num_scores, 2, "Press q to quit." );
-            wmove( w, 5 + (int) num_scores, 8 );
+            mvwprintw( w, 6 + (int) num_scores, 2, "Press q to quit." );
+            wmove( w, 6 + (int) num_scores, 8 );
             wrefresh( w );
 
             while( getch() != 'q' );

@@ -24,6 +24,9 @@ not documented in this file unless special circumstances require it.
 - The version number is now always displayed when the game is started, rather
   than only being displayed on debug or prerelease versions.
 
+- The player's score is now displayed with the high scores list, rather than
+  separately from it.
+
 ### Fixed
 
 - On Windows, the player's score data is output a second time after entering
