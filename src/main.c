@@ -363,6 +363,9 @@ int main()
     // Stop the timer.
     time_t end_time = time( NULL );
 
+    // Flush user input.
+    flushinp();
+
 
     // If the player has died, draw its corpse and wait for a quit.
     if( dead & 1 )

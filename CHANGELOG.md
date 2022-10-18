@@ -38,6 +38,8 @@ not documented in this file unless special circumstances require it.
 
 - The high scores list is now output even if the player cheated.
 
+- User input is now flushed before trying to enter a player name.
+
 
 ## [0.2.1] - 2022-10-13
 
