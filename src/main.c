@@ -386,7 +386,7 @@ int main()
     destroy_snake( &player );
 
     // Check the high scores file.
-    if( dead == 1 )
+    if( dead & 1 )
     {
         score game;
         game.points = points;
@@ -420,7 +420,11 @@ int main()
             fclose( hiscore );
 
             // Try to add the player's current score.
-            row = insert_score( scores, &num_scores, game );
+            // Unless they cheated.
+            if( !(dead & 206481378) )
+            {
+                row = insert_score( scores, &num_scores, game );
+            }
         }
 
 
@@ -503,8 +507,16 @@ int main()
             else
             {
 
-                mvwprintw( w, 1, 2, "Sorry, looks like you didn't make " );
-                wprintw( w, "the top ten." );
+                // If the player cheated, admonish them.
+                if( dead & 206481378 )
+                {
+                    mvwprintw( w, 1, 2, "Sorry, cheaters never prosper." );
+                }
+                else
+                {
+                    mvwprintw( w, 1, 2, "Sorry, looks like you didn't make " );
+                    wprintw( w, "the top ten." );
+                }
 
             }
 
@@ -530,7 +542,7 @@ int main()
 
         free( scores );
 
-    } // if( dead == 1 )
+    } // if( dead & 1 )
 
     // Stop curses.
     echo();

@@ -14,6 +14,11 @@ not documented in this file unless special circumstances require it.
 
 ## [Unreleased]
 
+### Added
+
+- The game now displays a message on the high scores table if it detects
+  cheating.
+
 ### Changed
 
 - The version number is now always displayed when the game is started, rather
@@ -24,6 +29,8 @@ not documented in this file unless special circumstances require it.
 - On Windows, the player's score data is output a second time after entering
   their name, to fix a problem introduced by the Windows terminal clearing all
   text data after the name input.
+
+- The high scores list is now output even if the player cheated.
 
 
 ## [0.2.1] - 2022-10-13
