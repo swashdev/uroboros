@@ -54,6 +54,10 @@ int main()
     }
 
 
+    // Initialize display data.
+    init_symbols();
+
+
     // Initialize RNG.
     unsigned int seed = (unsigned int) time( NULL );
 
@@ -374,9 +378,9 @@ pause_screen:
         // Draw the apple & the snake.
         draw_apple( apple_y, apple_x, player.length );
         
-        attron( COLOR_SNAKE );
-        mvaddch( player.head->y, player.head->x, CHAR_SNAKE );
-        attroff( COLOR_SNAKE );
+        attron( color_snake );
+        mvaddch( player.head->y, player.head->x, sym_snake );
+        attroff( color_snake );
 
         move( apple_y, apple_x );
 

@@ -63,44 +63,51 @@ void init_symbols()
 // Draws the apple.
 void draw_apple( int y, int x, unsigned int count )
 {
+
     // Decide whether to draw a regular apple or a golden apple.
-    attr_t color = (count % 10) ? COLOR_APPLE : COLOR_GOLD;
+    attr_t color = (count % 10) ? color_apple : color_gold;
 
     attron( color );
 
-    mvaddch( y, x, CHAR_APPLE );
+    mvaddch( y, x, sym_apple );
 
     attroff( color );
+
 }
 
 
 // Draws the snake.
 void draw_snake( struct snake snek )
 {
+
     struct segment *node = snek.head;
 
     int x, y;
 
-    attron( COLOR_SNAKE );
+    attron( color_snake );
 
     // Iterate through the whole list until we reach the tail.
     while( node != NULL )
     {
+
         x = node->x;
         y = node->y;
 
-        mvaddch( y, x, CHAR_SNAKE );
+        mvaddch( y, x, sym_snake );
 
         node = node->next;
+
     }
 
-    attroff( COLOR_SNAKE );
-}
+    attroff( color_snake );
+
+} // void draw_snake( struct snake )
 
 
 // Draws the snake but dead.
 void draw_dead_snake( struct snake snek )
 {
+
     struct segment *node = snek.head;
 
     int x, y;
@@ -108,13 +115,16 @@ void draw_dead_snake( struct snake snek )
     // Iterate through the whole list until we reach the tail.
     while( node != NULL )
     {
+
         x = node->x;
         y = node->y;
 
-        mvaddch( y, x, '%' );
+        mvaddch( y, x, sym_bone );
 
         node = node->next;
+
     }
+
 }
 
 
