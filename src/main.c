@@ -154,10 +154,6 @@ int main()
 
 
     // Display helpful information.
-#ifndef DEBUG
-    mvprintw( 0, 0, "Arrow keys, wasd, or hjkl to move.  " );
-    printw( "Press p to pause or q to quit." );
-#endif
     mvprintw( player.head->y, player.head->x + 2, "<- This is you" );
     if( apple_x < (max_x - 13) )
     {
