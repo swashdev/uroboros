@@ -25,8 +25,53 @@
 int main()
 {
 
-    // Set all options to defaults.
+    // Get options.
     init_options();
+
+#ifdef DEBUG
+    printf( "DEBUG: Reading options from %s\n", "options.txt" );
+#endif
+
+    int warnings = read_options_file( "options.txt" );
+
+    if( warnings < 0 )
+    {
+
+        printf( "Couldn't read options file at %s\n", "options.txt" );
+        perror( "Got error:" );
+
+    }
+    else if( warnings > 0 )
+    {
+
+        printf( "Got %d warnings while reading options from %s\n",
+                warnings, "options.txt" );
+
+    }
+
+    if( warnings != 0 )
+    {
+
+        int cont = '\n';
+
+        do
+        {
+
+            while( cont != '\n' )  cont = getchar();
+            puts( "Continue? [y/n/q]" );
+            cont = getchar();
+
+        } while( cont != 'n' && cont != 'y' && cont != 'q'
+              && cont != 'N' && cont != 'Y' && cont != 'Q' );
+
+        if( cont != 'y' && cont != 'Y' )
+        {
+
+            return 0;
+
+        }
+
+    }
 
     initscr();
     raw();
