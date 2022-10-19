@@ -61,4 +61,25 @@ int max_x;
 int max_y;
 
 
+// Player Options /////////////////////////////////////////////////////////////
+
+
+// Key bindings.
+int move_up, move_down, move_left, move_right,
+    speed_up, slow_down,
+#ifdef DEBUG
+    debug_grow, debug_shrink,
+#endif
+    quit_key, pause_key,
+    show_version, show_license;
+
+
+// Options relating to the display.
+flag_t display_flags;
+
+
+// Path to the hiscore file.
+char *hiscore_path;
+
+
 #endif
