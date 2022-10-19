@@ -27,11 +27,11 @@ around to the other side, rather than dying.
 
 ### Controls
 
- - Move: Arrow keys, wasd, or hjkl
+ - Move: Arrow keys
  - Pause: p
  - Quit: q
- - Increase Speed: + or =
- - Decrease Speed: - or _
+ - Increase Speed: = (plus key)
+ - Decrease Speed: - (minus key)
  - Version: v
  - View License: c
 
