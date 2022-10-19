@@ -14,6 +14,7 @@
 #include "curses.h"
 
 #include "globals.h"
+#include "options.h"
 #include "segment.h"
 #include "snake.h"
 #include "display.h"
@@ -23,6 +24,9 @@
 
 int main()
 {
+
+    // Set all options to defaults.
+    init_options();
 
     initscr();
     raw();
@@ -147,146 +151,168 @@ int main()
 #endif
 
         // Check input.
-        switch( input )
+        if( input == move_left )
         {
 
-            case 'v':
-                print_version_number( max_y - 1, 0 );
-                break;
+            if( direction != RIGHT ) direction = LEFT;
 
-            case 'c':
-                print_version_number( max_y - 1, 0 );
-                move( apple_y, apple_x );
-                display_license_agreement();
-                // Redraw the screen.
-                clear();
-                draw_snake( player );
-                draw_apple( apple_y, apple_x, player.length );
-                // Fall through to next case.
+        }
 
-            case 'p':
+        else if( input == move_down )
+        {
+
+            if( direction != UP )    direction = DOWN;
+
+        }
+
+        else if( input == move_up )
+        {
+
+            if( direction != DOWN )  direction = UP;
+        }
+
+        else if( input == move_right )
+        {
+
+            if( direction != LEFT )  direction = RIGHT;
+        }
+
+        // Decrease the game speed.
+        else if( input == slow_down )
+        {
+
+            if( fps > 1 )
+            {
+
+                fps--;
+                delay = CLOCKS_PER_SEC / fps;
+#ifdef DEBUG
+                mvprintw( 0, 0, "Speed: %u", fps );
+#endif
+
+            }
+            else
+            {
+
+                flash();
+#ifdef DEBUG
                 attron( A_REVERSE );
-                mvprintw( max_y / 2, (max_x / 2) - 12,
-                        "Press any key to unpause." );
+                mvprintw( 0, 0, "Speed: %u", fps );
                 attroff( A_REVERSE );
-                move( apple_y, apple_x );
-
-                while( getch() == ERR );
-
-                mvprintw( max_y / 2, (max_x / 2) - 12,
-                        "                         " );
-                draw_snake( player );
-                draw_apple( apple_y, apple_x, player.length );
-                break;
-
-
-            // Shrink the player.
-            case '_':
-#ifdef DEBUG
-                status = status | CHEATED;
-                if( player.length > 1 )
-                {
-                    segment *old_tail = player.tail;
-                    mvaddch( old_tail->y, old_tail->x, ' ' );
-                    player.tail = player.tail->previous;
-                    player.tail->next = NULL;
-                    destroy_segment( old_tail );
-                    player.length--;
-                    mvprintw( 0, 0, "Length: %u", player.length );
-                }
-                else
-                {
-                    status = status | DEAD;
-                }
-                break;
 #endif
 
+            }
 
-            // Decrease the game speed.
-            case '-':
-                if( fps > 1 )
-                {
-                    fps--;
-                    delay = CLOCKS_PER_SEC / fps;
+        } // else if( input == slow_down )
+
+        // Increase the game speed.
+        if( input == speed_up )
+        {
+
+            if( fps < CLOCKS_PER_SEC )
+            {
+
+                fps++;
+                delay = CLOCKS_PER_SEC / fps;
 #ifdef DEBUG
-                    mvprintw( 0, 0, "Speed: %u", fps );
+                mvprintw( 0, 0, "Speed: %u", fps );
 #endif
-                }
-                else
-                {
-                    flash();
+
+            }
+            else
+            {
+
+                flash();
 #ifdef DEBUG
-                    attron( A_REVERSE );
-                    mvprintw( 0, 0, "Speed: %u", fps );
-                    attroff( A_REVERSE );
+                attron( A_REVERSE );
+                mvprintw( 0, 0, "Speed: %u", fps );
+                attroff( A_REVERSE );
 #endif
-                }
-                break;
+            }
 
+        } // else if( input == speed_up )
 
-            // Grow the player.
-            case '+':
 #ifdef DEBUG
-                status = status | CHEATED;
-                grow_snake( &player );
+
+        // Grow the player.
+        else if( input == debug_grow )
+        {
+
+            status = status | CHEATED;
+            grow_snake( &player );
+            mvprintw( 0, 0, "Length: %u", player.length );
+
+        }
+
+        // Shrink the player.
+        else if( input == debug_shrink )
+        {
+
+            status = status | CHEATED;
+            if( player.length > 1 )
+            {
+                segment *old_tail = player.tail;
+                mvaddch( old_tail->y, old_tail->x, ' ' );
+                player.tail = player.tail->previous;
+                player.tail->next = NULL;
+                destroy_segment( old_tail );
+                player.length--;
                 mvprintw( 0, 0, "Length: %u", player.length );
-                break;
+            }
+            else
+            {
+                status = status | DEAD;
+            }
+
+        }
+
 #endif
 
+        // Pause the game.
+        else if( input == pause_key )
+        {
 
-            // Increase the game speed.
-            case '=':
-                if( fps < CLOCKS_PER_SEC )
-                {
-                    fps++;
-                    delay = CLOCKS_PER_SEC / fps;
-#ifdef DEBUG
-                    mvprintw( 0, 0, "Speed: %u", fps );
-#endif
-                }
-                else
-                {
-                    flash();
-#ifdef DEBUG
-                    attron( A_REVERSE );
-                    mvprintw( 0, 0, "Speed: %u", fps );
-                    attroff( A_REVERSE );
-#endif
-                }
-                break;
+pause_screen:
 
+            attron( A_REVERSE );
+            mvprintw( max_y / 2, (max_x / 2) - 12,
+                        "Press any key to unpause." );
+            attroff( A_REVERSE );
+            move( apple_y, apple_x );
 
-            case 'h':
-            case 'a':
-            case KEY_LEFT:
-                if( direction != RIGHT ) direction = LEFT;
-                break;
+            while( getch() == ERR );
 
-            case 'j':
-            case 's':
-            case KEY_DOWN:
-                if( direction != UP )    direction = DOWN;
-                break;
+            mvprintw( max_y / 2, (max_x / 2) - 12,
+                        "                         " );
+            draw_snake( player );
+            draw_apple( apple_y, apple_x, player.length );
 
-            case 'k':
-            case 'w':
-            case KEY_UP:
-                if( direction != DOWN )  direction = UP;
-                break;
+        }
 
-            case 'l':
-            case 'd':
-            case KEY_RIGHT:
-                if( direction != LEFT )  direction = RIGHT;
-                break;
+        else if( input ==  show_version )
+        {
 
-            case KEY_DC:
-            case KEY_BACKSPACE:
-                attron( COLOR_PAIR( 3 ) );
-                mvaddch( player.ghost_y, player.ghost_x, ' ' );
-                attroff( COLOR_PAIR( 3 ) );
+            print_version_number( max_y - 1, 0 );
 
-        } // switch( input )
+        }
+
+        else if( input == show_license )
+        {
+
+            print_version_number( max_y - 1, 0 );
+            move( apple_y, apple_x );
+            display_license_agreement();
+
+            // Redraw the screen.
+            clear();
+            draw_snake( player );
+            draw_apple( apple_y, apple_x, player.length );
+
+            // Pause the screen to give the player a chance to get their
+            // bearings.
+            goto pause_screen;
+
+        }
 
 
         // Move the player.
