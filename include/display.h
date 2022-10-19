@@ -20,40 +20,6 @@
 # include "snake.h"
 
 
-// Character data for the snake & the apple.
-# ifdef COLOR
-#  define CHAR_SNAKE ' '
-#  define CHAR_APPLE '\''
-# else
-#  define CHAR_SNAKE '#'
-#  define CHAR_APPLE '%'
-# endif
-
-
-// Color data for the snake & the apple.
-# ifdef COLOR
-#  define COLOR_SNAKE A_REVERSE | COLOR_PAIR( 1 )
-# else
-#  define COLOR_SNAKE A_BOLD | A_REVERSE
-# endif
-
-
-# ifndef COLOR
-#  define COLOR_APPLE 0
-#  define COLOR_GOLD  A_BOLD
-# else
-// If `HILITE_APPLE` is enabled, the color schemes for the apples will be
-// reversed, so that the terminal cursor doesn't screw them up.
-#  if 0
-#   define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
-#   define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
-#  else
-#   define COLOR_APPLE A_BOLD | COLOR_PAIR( 2 )
-#   define COLOR_GOLD  A_BOLD | A_REVERSE | COLOR_PAIR( 3 )
-#  endif
-# endif
-
-
 // Creates a curses window that's centered on the screen.
 #define centered_window( height, width ) \
     newwin( height, width, (max_y - height) / 2, (max_x - width) / 2 )
