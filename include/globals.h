@@ -39,6 +39,10 @@
 //# define DEBUG
 
 
+// A standard type for bitmask flags.
+typedef unsigned char flag_t;
+
+
 // Constants used to represent directions.
 # define INVALID  0
 # define UP      -1
