@@ -12,6 +12,17 @@ indicated by a "-dev" suffix followed by a number.  Dev builds are generally
 not documented in this file unless special circumstances require it.
 
 
+## [Unreleased]
+
+### Code Changes
+
+- A new variable type `flag_t` will now be used for bitmask flags.
+
+- Player status is now stored in a `flag_t` named `status` (originally named
+  `dead`) and now uses the named constants `DEAD` and `CHEATED` to determine
+  the respective player statuses.
+
+
 ## [0.2.2] - 2022-10-18
 
 ### Added
