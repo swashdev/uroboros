@@ -38,7 +38,7 @@ int main()
     {
 
         printf( "Couldn't read options file at %s\n", "options.txt" );
-        perror( "Got error:" );
+        perror( "Got error" );
 
     }
     else if( warnings > 0 )
