@@ -434,7 +434,7 @@ pause_screen:
         int row = -1;
 
         // Open the hiscore file for reading.
-        FILE *hiscore = fopen( "hiscore", "r" );
+        FILE *hiscore = fopen( hiscore_path, "r" );
 
         // If the hiscore file wasn't read, our job has been made very easy.
         if( hiscore == NULL )
@@ -570,7 +570,7 @@ pause_screen:
         // If the player made the high scores list, we have to write it anew.
         if( row >= 0 )
         {
-            hiscore = fopen( "hiscore", "w" );
+            hiscore = fopen( hiscore_path, "w" );
 
             write_hiscore_file( hiscore, scores, num_scores );
 
