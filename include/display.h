@@ -16,19 +16,8 @@
 
 # include "curses.h"
 
+# include "globals.h"
 # include "snake.h"
-
-
-// Enable this to enable color.  Makes the game generally look better.
-// Disabling this will cause the game to use alternate characters that should
-// be more visible on displays which don't support color.
-# define COLOR
-
-
-// Enable this to reverse the apple's colors.  If your terminal's colors
-// reverse the apple's colors, this will correct that.  Has no effect if
-// `COLOR` is not enabled.
-//# define HILITE_APPLE
 
 
 // Character data for the snake & the apple.
@@ -55,7 +44,7 @@
 # else
 // If `HILITE_APPLE` is enabled, the color schemes for the apples will be
 // reversed, so that the terminal cursor doesn't screw them up.
-#  ifdef HILITE_APPLE
+#  if 0
 #   define COLOR_APPLE A_BOLD | A_REVERSE | COLOR_PAIR( 2 )
 #   define COLOR_GOLD  A_BOLD | COLOR_PAIR( 3 )
 #  else
