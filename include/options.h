@@ -21,5 +21,11 @@ void init_options();
 // Returns a 1 on success or a 0 on failure.
 int assign_keybind( int *target, const char *value );
 
+// Reads in options from a file at the given path.  This function will print
+// warning messages to stdio if it reads an invalid line from the file.
+// Returns 1 if any such invalid lines were found, 0 otherwise.  Returns -1
+// if the options file was not found.
+int read_options_file( const char *path );
+
 
 #endif
