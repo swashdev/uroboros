@@ -391,6 +391,8 @@ int read_options_file( const char *path )
     show_keybind( "slow_down", slow_down );
     show_keybind( "debug_grow", debug_grow );
     show_keybind( "debug_shrink", debug_shrink );
+    show_keybind( "pause_key", pause_key );
+    show_keybind( "quit_key", quit_key );
     show_keybind( "show_version", show_version );
     show_keybind( "show_license", show_license );
     show_boolean( "color", COLOR, display_flags );
