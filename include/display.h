@@ -59,6 +59,10 @@
     newwin( height, width, (max_y - height) / 2, (max_x - width) / 2 )
 
 
+// Initializes color & symbol data.
+void init_symbols();
+
+
 // Draws the snake.
 void draw_snake( snake snek );
 

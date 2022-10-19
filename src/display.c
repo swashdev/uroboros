@@ -15,6 +15,51 @@
 #include "display.h"
 
 
+// Initializes color & symbol data.
+void init_symbols()
+{
+
+    sym_bone = '%';
+
+    if( display_flags & COLOR )
+    {
+
+        sym_snake = ' ';
+        sym_apple = '\'';
+
+        color_snake = A_REVERSE | COLOR_PAIR( 1 );
+
+        if( display_flags & HILITE_APPLE )
+        {
+
+            color_apple = A_BOLD | A_REVERSE | COLOR_PAIR ( 2 );
+            color_gold  = A_BOLD | COLOR_PAIR( 3 );
+
+        }
+        else
+        {
+
+            color_apple = A_BOLD | COLOR_PAIR( 2 );
+            color_gold  = A_BOLD | A_REVERSE | COLOR_PAIR( 3 );
+
+        }
+
+    } // if( display_flags & COLOR )
+    else
+    {
+
+        sym_snake = '#';
+        sym_apple = '%';
+
+        color_snake = A_BOLD | A_REVERSE;
+        color_apple = 0;
+        color_gold  = A_BOLD;
+
+    }
+
+} // void init_symbols()
+
+
 // Draws the apple.
 void draw_apple( int y, int x, unsigned int count )
 {
