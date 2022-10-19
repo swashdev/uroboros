@@ -14,6 +14,12 @@ not documented in this file unless special circumstances require it.
 
 ## [Unreleased]
 
+### Added
+
+- Certain program settings, such as key bindings and display settings, can now
+  be set by the user in an options file, included with Uroboros.  The game no
+  longer needs to be recompiled in order to be reconfigured.
+
 ### Code Changes
 
 - A new variable type `flag_t` will now be used for bitmask flags.
