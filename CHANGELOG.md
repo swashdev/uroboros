@@ -20,6 +20,12 @@ not documented in this file unless special circumstances require it.
   be set by the user in an options file, included with Uroboros.  The game no
   longer needs to be recompiled in order to be reconfigured.
 
+### Fixed
+
+- The message mocking people who die with low scores now appropriately displays
+  whenever the player's score is impossibly low, not just when it's under 4
+  points.
+
 ### Code Changes
 
 - A new variable type `flag_t` will now be used for bitmask flags.

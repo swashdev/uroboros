@@ -517,7 +517,7 @@ pause_screen:
             WINDOW *w = centered_window( height, width );
             box( w, 0, 0 );
             mvwprintw( w, 1, 2, "You died with %d points.", game.points );
-            if( game.points < 4 )
+            if( game.points <= 4 )
             {
                 wprintw( w, "  Wow, how did you even do that?" );
             }
