@@ -432,7 +432,7 @@ pause_screen:
         // Delay for a given amount of time before continuing.
         while( clock() < frame_time + delay );
 
-    } while( !(status & DEAD) && input != 'q' );
+    } while( !(status & DEAD) && input != quit_key );
 
 
     // Stop the timer.
