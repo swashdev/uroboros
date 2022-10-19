@@ -59,7 +59,7 @@ able to figure it out with some simple Internet searches.
 
 Uroboros can be compiled via a single gcc command like so:
 ```
-gcc -I include src/segment.c src/snake.c src/display.c src/rank.c src/hiscore.c src/main.c -o uroboros -lncurses
+gcc -I include src/options.c src/segment.c src/snake.c src/display.c src/rank.c src/hiscore.c src/main.c -o uroboros -lncurses
 ```
 
 For Windows I've been able to successfully use MinGW, although I've found that
@@ -78,23 +78,6 @@ source code.
 
 To make a debug build, go into `include/globals.h` and enable the `DEBUG` flag
 by un-commenting the line it's defined on.
-
-
-#### Better Apple Colors
-
-If your terminal reverses the colors on the apples so that the red apples look
-weird and the golden apples look like poo with a little corn in it, you can
-reverse the colors back by going into `include/display.h` and enabling the
-`HILITE_APPLE` flag.  Note that colors need to be enabled in order for this
-to have any effect.
-
-
-#### Disabling Color
-
-If you have a terminal that doesn't support color or, for any other reason, the
-colors that the game uses make the game harder for you to play, you can disable
-color entirely by going into `include/display.h` and disabling the `COLOR`
-flag.
 
 
 License
