@@ -36,18 +36,22 @@ int main()
 
     keypad( stdscr, 1 );
 
-#ifdef COLOR
-    start_color();
 
-    // Initialize the color pair for the snake.
-    init_pair( 1, COLOR_GREEN, COLOR_BLACK );
+    if( display_flags & COLOR )
+    {
 
-    // Initialize the color pair for the apple.
-    init_pair( 2, COLOR_GREEN, COLOR_RED );
+        start_color();
 
-    // Initialize the color pair for the golden apple.
-    init_pair( 3, COLOR_YELLOW, COLOR_YELLOW );
-#endif
+        // Initialize the color pair for the snake.
+        init_pair( 1, COLOR_GREEN, COLOR_BLACK );
+
+        // Initialize the color pair for the apple.
+        init_pair( 2, COLOR_GREEN, COLOR_RED );
+
+        // Initialize the color pair for the golden apple.
+        init_pair( 3, COLOR_YELLOW, COLOR_YELLOW );
+
+    }
 
 
     // Initialize RNG.
