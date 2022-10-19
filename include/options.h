@@ -17,5 +17,9 @@
 // Initialize all options to their default values.
 void init_options();
 
+// Attempts to assign a key binding to `target` based on the input `value`.
+// Returns a 1 on success or a 0 on failure.
+int assign_keybind( int *target, const char *value );
+
 
 #endif
