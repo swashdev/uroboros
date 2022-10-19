@@ -68,13 +68,7 @@ third-party 32-bit compliers are becoming increasingly difficult to find and
 I'm not sure PDCurses even supports 64-bit systems.  Your mileage may vary.
 
 
-### Customizing
-
-For the time being, customizing your copy of Uroboros has to be done by editing
-source code.
-
-
-#### Debug Builds
+###  Debug Builds
 
 To make a debug build, go into `include/globals.h` and enable the `DEBUG` flag
 by un-commenting the line it's defined on.
