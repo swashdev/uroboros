@@ -36,6 +36,14 @@ around to the other side, rather than dying.
  - View License: c
 
 
+### Customizing
+
+You can personalize your game by editing [options.txt][options].  Instructions
+on how to do so are included in that file.
+
+[options]: options.txt
+
+
 Compiling
 ---------
 
