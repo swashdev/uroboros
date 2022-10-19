@@ -114,7 +114,7 @@ int main()
 
     signed char direction = INVALID;
     int input = 0;
-    int dead = 0;
+    flag_t status = 0;
     clock_t fps = 10;
     clock_t delay = CLOCKS_PER_SEC / fps;
     clock_t frame_time;
@@ -183,7 +183,7 @@ int main()
             // Shrink the player.
             case '_':
 #ifdef DEBUG
-                dead = dead | 206481378;
+                status = status | CHEATED;
                 if( player.length > 1 )
                 {
                     segment *old_tail = player.tail;
@@ -196,7 +196,7 @@ int main()
                 }
                 else
                 {
-                    dead = dead | 1;
+                    status = status | DEAD;
                 }
                 break;
 #endif
@@ -227,7 +227,7 @@ int main()
             // Grow the player.
             case '+':
 #ifdef DEBUG
-                dead = dead | 206481378;
+                status = status | CHEATED;
                 grow_snake( &player );
                 mvprintw( 0, 0, "Length: %u", player.length );
                 break;
@@ -332,14 +332,14 @@ int main()
             if( head_x == current->x && head_y == current->y )
             {
                 // Kill the player and terminate the mainloop.
-                dead = dead | 1;
+                status = status | DEAD;
                 break;
             }
 
             current = current->next;
         }
 
-        if( dead & 1 )  break;
+        if( status & DEAD )  break;
 
         // Draw the apple & the snake.
         draw_apple( apple_y, apple_x, player.length );
@@ -357,7 +357,7 @@ int main()
         // Delay for a given amount of time before continuing.
         while( clock() < frame_time + delay );
 
-    } while( !(dead & 1) && input != 'q' );
+    } while( !(status & DEAD) && input != 'q' );
 
 
     // Stop the timer.
@@ -368,7 +368,7 @@ int main()
 
 
     // If the player has died, draw its corpse and wait for a quit.
-    if( dead & 1 )
+    if( status & DEAD )
     {
         draw_dead_snake( player );
 
@@ -384,7 +384,7 @@ int main()
     destroy_snake( &player );
 
     // Check the high scores file.
-    if( dead & 1 )
+    if( status & DEAD )
     {
         score game;
         game.points = points;
@@ -419,7 +419,7 @@ int main()
 
             // Try to add the player's current score.
             // Unless they cheated.
-            if( !(dead & 206481378) )
+            if( !(status & CHEATED) )
             {
                 row = insert_score( scores, &num_scores, game );
             }
@@ -511,7 +511,7 @@ int main()
             {
 
                 // If the player cheated, admonish them.
-                if( dead & 206481378 )
+                if( status & CHEATED )
                 {
                     mvwprintw( w, 2, 2, "Sorry, cheaters never prosper." );
                 }
@@ -545,7 +545,7 @@ int main()
 
         free( scores );
 
-    } // if( dead & 1 )
+    } // if( status & DEAD )
 
     // Stop curses.
     echo();

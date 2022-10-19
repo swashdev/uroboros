@@ -51,6 +51,11 @@ typedef unsigned char flag_t;
 # define RIGHT    2
 
 
+// Constants used to represent player status.
+# define DEAD    0x1
+# define CHEATED 0x2
+
+
 // The outer boundaries of the terminal.
 int max_x;
 int max_y;
