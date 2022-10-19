@@ -14,6 +14,9 @@
 // This header file is used for global variables and constants.
 
 
+# include "curses.h"
+
+
 // The version number for the program.  An effort is made to follow the
 // semantic versioning standard 2.0.0 <https://semver.org/spec/v2.0.0.html>
 // Dev builds, indicated by a version number ending with "-dev.%d", represent
@@ -59,6 +62,13 @@ typedef unsigned char flag_t;
 // The outer boundaries of the terminal.
 int max_x;
 int max_y;
+
+
+// Color data.
+attr_t color_snake, color_apple, color_gold;
+
+// What symbols are used to represent in-game objects.
+char sym_snake, sym_apple, sym_bone;
 
 
 // Player Options /////////////////////////////////////////////////////////////
