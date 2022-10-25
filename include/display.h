@@ -1,10 +1,14 @@
-// This is public domain software.  Feel free to do whatever you want with it
-// so long as you don't hold me liable for any damages - there is no warranty.
+// This is free and unencumbered software released into the public domain.
 //
-// If you want to pay me back for it, you can do so by taking ten minutes or
-// more out of each day to remind yourself that you are valuable and your life
-// is worth living, and treating yourself like someone worth taking care of.
-// This software is already free; now free yourself.
+// For more information, please refer to the Unlicense, which should be
+// included with the original source distribution or at <https://unlicense.org>
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #ifndef INCLUDE_DISPLAY_H

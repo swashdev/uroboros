@@ -1,10 +1,14 @@
-// This is public domain software.  Feel free to do whatever you want with it
-// so long as you don't hold me liable for any damages - there is no warranty.
+// This is free and unencumbered software released into the public domain.
 //
-// If you want to pay me back for it, you can do so by taking ten minutes or
-// more out of each day to remind yourself that you are valuable and your life
-// is worth living, and treating yourself like someone worth taking care of.
-// This software is already free; now free yourself.
+// For more information, please refer to the Unlicense, which should be
+// included with the original source distribution or at <https://unlicense.org>
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+// AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+// ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+// WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
 #include "curses.h"
@@ -158,28 +162,147 @@ void print_version_number( int y, int x )
 void display_license_agreement()
 {
 
-    WINDOW *w = centered_window( 12, 80 );
+    int height = 26 > max_y ? max_y : 26, width = 73, x = (max_x - width) / 2,
+        y = height > max_y ? 0 : (max_y - height) / 2;
+    WINDOW *w = newwin( height, width, y, x );
 
-    box( w, 0, 0 );
+    keypad( w, 1 );
 
-    mvwprintw( w, 1, 2, "This is public domain software.  Feel free to do " );
-    wprintw( w, "whatever you want with it" );
-    mvwprintw( w, 2, 2, "so long as you don't hold me liable for any " );
-    wprintw( w, "damages - there is no warranty." );
+    int input;
+    int scroll = 0;
+    char *str;
 
-    mvwprintw( w, 4, 2, "If you want to pay me back for it, you can do so " );
-    wprintw( w, "by taking ten minutes or" );
-    mvwprintw( w, 5, 2, "more out of each day to remind yourself that you " );
-    wprintw( w, "are valuable and your life" );
-    mvwprintw( w, 6, 2, "is worth living, and treating yourself like " );
-    wprintw( w, "someone worth taking care of." );
-    mvwprintw( w, 7, 2, "This software is already free; now free yourself." );
+    do
+    {
 
-    mvwprintw( w, 10, 2, "Press SPACE to close this window." );
+        wclear( w );
+        box( w, 0, 0 );
 
-    wrefresh( w );
+        if( height < 26 )
+        {
 
-    while( getch() != ' ' );
+            mvwaddch( w, 1, width - 1, '^' );
+            mvwaddch( w, height - 2, width - 1, 'v' );
+
+        }
+
+        y = 0;
+        for( int line = scroll; line < 24 && y < height - 2; line++ )
+        {
+
+            y += 1;
+
+            switch( line )
+            {
+
+                default:
+                    continue;
+
+                case 0:
+                    str = "This is free and unencumbered software released into the public domain.";
+                    break;
+
+                case 2:
+                    str = "Anyone is free to copy, modify, publish, use, compile, sell, or";
+                    break;
+
+                case 3:
+                    str = "distribute this software, either in source code form or as a compiled";
+                    break;
+
+                case 4:
+                    str = "binary, for any purpose, commercial or non-commercial, and by any";
+                    break;
+
+                case 5:
+                    str = "means";
+                    break;
+
+                case 7:
+                    str = "In jurisdictions that recognize copyright laws, the author or authors";
+                    break;
+
+                case 8:
+                    str = "of this software dedicate any and all copyright interest in the";
+                    break;
+
+                case 9:
+                    str = "software to the public domain. We make this dedication for the benefit";
+                    break;
+
+                case 10:
+                    str = "of the public at large and to the detriment of our heirs and";
+                    break;
+
+                case 11:
+                    str = "successors. We intend this dedication to be an overt act of";
+                    break;
+
+                case 12:
+                    str = "relinquishment in perpetuity of all present and future rights to this";
+                    break;
+
+                case 13:
+                    str = "software under copyright law.";
+                    break;
+
+                case 15:
+                    str = "THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,";
+                    break;
+
+                case 16:
+                    str = "EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF";
+                    break;
+
+                case 17:
+                    str = "MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.";
+                    break;
+
+                case 18:
+                    str = "IN NO EVENT SHALL THE AUTHORS BE LIABLE FOR ANY CLAIM, DAMAGES OR";
+                    break;
+
+                case 19:
+                    str = "OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,";
+                    break;
+
+                case 20:
+                    str = "ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR";
+                    break;
+
+                case 21:
+                    str = "OTHER DEALINGS IN THE SOFTWARE.";
+                    break;
+
+                case 23:
+                    str = "For more information, please refer to <https://unlicense.org/>";
+                    break;
+
+            }
+
+            mvwprintw( w, y, 1, str );
+
+        }
+
+        mvwprintw( w, height - 1, 1, " Press SPACE to close this window. " );
+
+#ifdef DEBUG
+        wprintw( w, "scroll: %02d ", scroll );
+#endif
+
+        wrefresh( w );
+
+        input = wgetch( w );
+        if( input == move_down && scroll < (26 - height) )
+        {
+            scroll += 1;
+        }
+        else if( input == move_up && scroll > 0 )
+        {
+            scroll -= 1;
+        }
+
+    } while( input != ' ' );
 
     delwin( w );
 

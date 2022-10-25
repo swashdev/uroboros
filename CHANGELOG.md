@@ -14,11 +14,20 @@ not documented in this file unless special circumstances require it.
 
 ## [Unreleased]
 
+### Notes
+
+- In order to protect users who are subject to tyrannical governments, the
+  license agreement has been changed from the previous informal license to the
+  Unlicense.
+
 ### Added
 
 - Certain program settings, such as key bindings and display settings, can now
   be set by the user in an options file, included with Uroboros.  The game no
   longer needs to be recompiled in order to be reconfigured.
+
+- If the player's terminal is shorter than the height of the license agreement
+  disclosure window, the window can now be scrolled up and down.
 
 ### Fixed
 
