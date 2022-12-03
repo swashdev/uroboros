@@ -12,7 +12,7 @@ indicated by a "-dev" suffix followed by a number.  Dev builds are generally
 not documented in this file unless special circumstances require it.
 
 
-## [Unreleased]
+## [0.3.0-dev.2] - 2022-12-03
 
 ### Notes
 
