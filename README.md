@@ -85,19 +85,10 @@ by un-commenting the line it's defined on.
 License
 -------
 
-Uroboros has been voluntarily [released into the public domain](LICENSE) and I
-retain no copyright, patents, or other interests in the software.  You can
+Uroboros has been voluntarily [released into the public domain](UNLICENSE) and
+I retain no copyright, patents, or other interests in the software.  You can
 compile it, modify it, share it with your friends, sell it for profit, launch
-it into space, tattoo it on your forearm, or even realease it under the GPL for
+it into space, tattoo it on your forearm, or even release it under the GPL for
 all I care.  Go bananas.  Just bear in mind that Uroboros is released with
 **absolutely no warranty** and that I will not be held liable for any damages
 under any circumstances.
-
-If you don't like the license agreement I've included with it because you're
-one of those necktie-wearing types who needs everything to be in legaleze,
-consider this paragraph your official permission to consider it released under
-the [CC0 license](https://creativecommons.org/publicdomain/zero/1.0/)  instead
-or something.  Really I'd prefer it if you would use
-[the Unlicense](https://unlicense.org/) beacuse it avoids the unnecessary
-lawyer talk that I specifically wrote my license to get away from, but
-ultimately the distinction is immaterial in this context.
