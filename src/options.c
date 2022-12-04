@@ -168,7 +168,7 @@ int read_options_file( const char *path )
         count = count + 1;
 
         // Read up to 80 characters of the given line.
-        fgets( line, 80, options );        
+        fgets( line, 80, options );
 
         // If the line is blank or starts with a '#', skip it.
         length = strlen( line );
