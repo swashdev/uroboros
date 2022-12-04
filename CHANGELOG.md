@@ -12,6 +12,14 @@ indicated by a "-dev" suffix followed by a number.  Dev builds are generally
 not documented in this file unless special circumstances require it.
 
 
+## [Unreleased]
+
+### Fixed
+
+- Lines read in from the options file are now reset after each line read, to
+  prevent assigning options twice under certain circumstances.
+
+
 ## [0.3.0-dev.2] - 2022-12-03
 
 ### Notes

@@ -162,6 +162,7 @@ int read_options_file( const char *path )
     while( !feof( options ) )
     {
 
+        line[0] = '\0';
         check_keybind = 0;
         check_display_flag = 0;
         count = count + 1;
