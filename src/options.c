@@ -147,12 +147,12 @@ int read_options_file( const char *path )
     }
 
     // Read the file.
-    char *line   = (char*) malloc( 81 );
-    char *key = (char*) malloc( 21 );
-    char *value  = (char*) malloc( FILENAME_MAX );
-    line[80] = '\0';
-    key[20] = '\0';
-    value[FILENAME_MAX - 1] = '\0';
+    char line[81];
+    char key[21];
+    char value[61];
+    line[80]  = '\0';
+    key[20]   = '\0';
+    value[60] = '\0';
     size_t count = 0;
     int pair;
     size_t length;
@@ -376,9 +376,6 @@ int read_options_file( const char *path )
 
     } // while( !eof( options ) )
 
-    free( line );
-    free( key );
-    free( value );
     fclose( options );
 
 #ifdef DEBUG

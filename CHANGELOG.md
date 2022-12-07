@@ -19,6 +19,12 @@ not documented in this file unless special circumstances require it.
 - Lines read in from the options file are now reset after each line read, to
   prevent assigning options twice under certain circumstances.
 
+### Code Changes
+
+- Strings used when reading in the options file are now statically allocated
+  rather than being dynamically allocated at runtime.  They should also use
+  less memory this way.
+
 
 ## [0.3.0-dev.2] - 2022-12-03
 
