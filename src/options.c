@@ -148,10 +148,10 @@ int read_options_file( const char *path )
 
     // Read the file.
     char line[81];
-    char key[21];
+    char key[13];
     char value[61];
     line[80]  = '\0';
-    key[20]   = '\0';
+    key[12]   = '\0';
     value[60] = '\0';
     size_t count = 0;
     int pair;

@@ -25,6 +25,9 @@ not documented in this file unless special circumstances require it.
   rather than being dynamically allocated at runtime.  They should also use
   less memory this way.
 
+- The "key" string, used when reading in the names of options to be set, has
+  been shrunk down to 12 characters, the length of the longest option name.
+
 
 ## [0.3.0-dev.2] - 2022-12-03
 
