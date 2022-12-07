@@ -18,6 +18,11 @@
 #include "curses.h"
 
 #include "globals.h"
+
+#ifdef DEBUG
+# include <assert.h>
+#endif
+
 #include "options.h"
 #include "segment.h"
 #include "snake.h"
@@ -129,9 +134,20 @@ int main()
 
 
     player.head = (segment*) malloc( sizeof( segment ) );
+
+#ifdef DEBUG
+    assert( ("Allocation of memory for player head.", player.head) );
+#endif
+
     player.head->x = max_x / 2;
     player.head->y = max_y / 2;
+
     player.tail = player.head;
+
+#ifdef DEBUG
+    assert( ("Assignment of player tail to player.head.", player.tail) );
+#endif
+
     player.ghost_x = -1;
     player.ghost_y = -1;
     player.length = 1;

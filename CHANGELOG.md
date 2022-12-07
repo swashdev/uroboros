@@ -19,6 +19,11 @@ not documented in this file unless special circumstances require it.
 - Lines read in from the options file are now reset after each line read, to
   prevent assigning options twice under certain circumstances.
 
+### Added
+
+- Debug builds now contain some `assert` calls used to verify that the memory
+  for the player character's head and tail has been allocated properly.
+
 ### Code Changes
 
 - Strings used when reading in the options file are now statically allocated
