@@ -2,15 +2,14 @@ Uroboros
 ========
 
 Uroboros is a pretty simple Snake clone that runs in your computer's terminal.
-It has currently been tested on Windows, macOS, and Linux.
+It is confirmed to run on Linux.  However, previous builds have also been
+tested on macOS.
 
 Uroboros is a project I started as part of an effort to build more games by
 challenging myself to see what I could build in only a week.  The bulk of the
 game's logic was written in only two days (actually one and a half, with the
 other half dedicated to troubleshooting my compilers) and much of the rest of
 the time so far has been spent smoothing things out.
-I'm optimistic that I'll be able to get version 1.0.0 out there by the time the
-deadline comes up.
 
 
 Play of the Game

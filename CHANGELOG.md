@@ -14,6 +14,11 @@ not documented in this file unless special circumstances require it.
 
 ## [Unreleased]
 
+### Notes
+
+- Windows support has been dropped due to unresolvable segmentation faults
+  whose origins remain a mystery.
+
 ### Fixed
 
 - Lines read in from the options file are now reset after each line read, to
