@@ -88,6 +88,9 @@ int main()
     cbreak();
     nodelay( stdscr, TRUE );
 
+    // Hide the cursor.
+    curs_set( 0 );
+
     keypad( stdscr, 1 );
 
 
@@ -472,6 +475,9 @@ pause_screen:
         refresh();
 
     }
+
+    // Un-hide the cursor.
+    curs_set( 1 );
 
     unsigned int final_length = player.length;
     unsigned int points = final_length > 0 ? final_length - 1 : 0;
