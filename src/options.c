@@ -323,12 +323,6 @@ int read_options_file( const char *path )
             check_display_flag = COLOR;
 
         }
-        else if( !strcmp( key, "hilite_apple" ) )
-        {
-
-            check_display_flag = HILITE_APPLE;
-
-        }
 
         // Check if a display flag has been set.  If it has, check a boolean
         // value.
@@ -398,7 +392,6 @@ int read_options_file( const char *path )
     show_keybind( "show_version", show_version );
     show_keybind( "show_license", show_license );
     show_boolean( "color", COLOR, display_flags );
-    show_boolean( "hilite_apple", HILITE_APPLE, display_flags );
 
 # undef show_keybind
 # undef show_boolean

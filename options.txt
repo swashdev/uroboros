@@ -53,10 +53,3 @@ show_license = c
 # Disabling color will cause Uroboros to use an alternative character set which
 # should hopefully be more visible on terminals which don't support color.
 color = yes
-
-# Some terminal cursors flip the colors of the apple, causing it to appear in
-# red-on-green or yellow-on-brown, the opposite of the intended colors.
-# Setting this value to "yes" will cause the game to try to compensate for this
-# by flipping the colors ahead of time.
-# Has no effect if color is disabled.
-hilite_apple = no

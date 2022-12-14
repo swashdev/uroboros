@@ -19,6 +19,9 @@ not documented in this file unless special circumstances require it.
 - Lines read in from the options file are now reset after each line read, to
   prevent assigning options twice under certain circumstances.
 
+- The "hilite\_apples" option has been removed in favor of simply hiding the
+  terminal cursor on startup.
+
 ### Added
 
 - Debug builds now contain some `assert` calls used to verify that the memory

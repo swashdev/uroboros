@@ -93,7 +93,6 @@ flag_t display_flags;
 
 // Possible values for `display_flags`
 # define COLOR        0x01
-# define HILITE_APPLE 0x02
 
 
 // Path to the hiscore file.

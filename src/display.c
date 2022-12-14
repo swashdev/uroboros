@@ -32,21 +32,9 @@ void init_symbols()
         sym_apple = '\'';
 
         color_snake = A_REVERSE | COLOR_PAIR( 1 );
-
-        if( display_flags & HILITE_APPLE )
-        {
-
-            color_apple = A_BOLD | A_REVERSE | COLOR_PAIR ( 2 );
-            color_gold  = A_BOLD | COLOR_PAIR( 3 );
-
-        }
-        else
-        {
-
-            color_apple = A_BOLD | COLOR_PAIR( 2 );
-            color_gold  = A_BOLD | A_REVERSE | COLOR_PAIR( 3 );
-
-        }
+        
+        color_apple = A_BOLD | COLOR_PAIR( 2 );
+        color_gold  = A_BOLD | A_REVERSE | COLOR_PAIR( 3 );
 
     } // if( display_flags & COLOR )
     else
