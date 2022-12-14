@@ -43,7 +43,7 @@ void init_options()
     show_version = 'v';
     show_license = 'c';
 
-    display_flags = COLOR;
+    color = 1;
 
     hiscore_path = "hiscore";
 
@@ -158,13 +158,11 @@ int read_options_file( const char *path )
     size_t length;
     int keybind;
     char check_keybind;
-    flag_t check_display_flag;
     while( !feof( options ) )
     {
 
         line[0] = '\0';
         check_keybind = 0;
-        check_display_flag = 0;
         count = count + 1;
 
         // Read up to 80 characters of the given line.
@@ -320,25 +318,16 @@ int read_options_file( const char *path )
         else if( !strcmp( key, "color" ) || !strcmp( key, "colour" ) )
         {
 
-            check_display_flag = COLOR;
-
-        }
-
-        // Check if a display flag has been set.  If it has, check a boolean
-        // value.
-        if( check_display_flag )
-        {
-
             if( value[0] == 'y' || value[0] == 'Y' )
             {
 
-                display_flags = display_flags | check_display_flag;
+                color = 1;
 
             }
             else if( value[0] == 'n' || value[0] == 'N' )
             {
 
-                display_flags = display_flags & ~check_display_flag;
+                color = 0;
 
             }
             else
@@ -351,11 +340,10 @@ int read_options_file( const char *path )
 
             }
 
-            // Whether the boolean was set successfully or not, we are done
-            // and can move on.
             continue;
 
-        } // if( check_display_flag )
+        }
+
         // If none of the above option checks have passed, the line is invalid
         // and we need to nag the user.
         else
@@ -391,7 +379,7 @@ int read_options_file( const char *path )
     show_keybind( "quit_key", quit_key );
     show_keybind( "show_version", show_version );
     show_keybind( "show_license", show_license );
-    show_boolean( "color", COLOR, display_flags );
+    show_boolean( "color", 1, color );
 
 # undef show_keybind
 # undef show_boolean

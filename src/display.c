@@ -25,7 +25,7 @@ void init_symbols()
 
     sym_bone = '%';
 
-    if( display_flags & COLOR )
+    if( color )
     {
 
         sym_snake = ' ';
@@ -36,7 +36,7 @@ void init_symbols()
         color_apple = A_BOLD | COLOR_PAIR( 2 );
         color_gold  = A_BOLD | A_REVERSE | COLOR_PAIR( 3 );
 
-    } // if( display_flags & COLOR )
+    } // if( color )
     else
     {
 

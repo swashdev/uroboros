@@ -94,7 +94,7 @@ int main()
     keypad( stdscr, 1 );
 
 
-    if( display_flags & COLOR )
+    if( color )
     {
 
         start_color();

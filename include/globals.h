@@ -89,10 +89,7 @@ int move_up, move_down, move_left, move_right,
 
 
 // Options relating to the display.
-flag_t display_flags;
-
-// Possible values for `display_flags`
-# define COLOR        0x01
+char color;
 
 
 // Path to the hiscore file.
